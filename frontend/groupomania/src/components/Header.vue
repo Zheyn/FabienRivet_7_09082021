@@ -11,14 +11,14 @@
       </div>
       <div class='header_link-all'>
         <div class="header_icon"><i class="fas fa-sign-in-alt"></i></div>
-        <div class="header_icon-text"><a href="" class="header_link-profil">Se connecter</a></div>
+        <div class="header_icon-text"><a href="" class="header_link-profil">Connexion</a></div>
       </div>
       <div class='header_link-all'>
         <div class="header_icon"><i class="fas fa-sign-out-alt"></i></div>
-        <div class="header_icon-text"><a href="" class="header_link-profil">Se déconnecter</a></div>
+        <div class="header_icon-text"><a href="" class="header_link-profil">Déconnexion</a></div>
       </div>
-      <div class='header_link-all'>
-        <v-btn class="mx-2 btn_post" fab dark large color="cyan">
+      <div class='header_link-post'>
+        <v-btn class="mx-2 btn_post" fab dark medium color="cyan">
         <v-icon dark>mdi-pencil</v-icon>
         </v-btn>
       </div>
@@ -30,19 +30,21 @@
   
 </script>
 
-<style scoped lang="scss">
+<style  lang="scss">
   .header{
+    position: sticky;
+    top: 0;
+    grid-row: 1 / 3;
+    grid-column: 1 / 2;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    border-right: rgb(201, 201, 201) 1px solid;
     height: 100vh;
     width: 100%;
-    padding-top: 5%;
     & .header_link-profil{
       display: block;
       width: 100%;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       text-decoration: none;
       transition: .2s ease-in-out;
       color: rgb(218, 218, 218);
@@ -56,7 +58,6 @@
     }
     .header_link{
       width: 50%;
-      height: 100%;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -89,6 +90,12 @@
       
       width: 20%;
       
+    }
+    & .header_link-post{
+      display: flex;
+      justify-content: center;
+      width: 80%;
+      padding-top: 30px;
     }
   }
   

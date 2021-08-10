@@ -15,11 +15,10 @@ export default {
 };
 </script>
 
-<style>
- body{
-   background-color: rgb(18, 21, 34);
- }
- #app{
-   font-family: 'Inter', sans-serif;
+<style lang="scss">
+
+body{
+   font-family: Inter, sans-serif;
+   background-color: rgb(21, 32, 43);
  }
 </style>
