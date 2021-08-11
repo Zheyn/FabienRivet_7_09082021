@@ -7,7 +7,7 @@
           id="textarea"
           class="text_area"
           color="white"
-          label="Votre message"
+          label="Quoi de neuf ?"
           no-resize
         ></v-textarea>
         <div class="menu_message d-flex justify-space-around align-center">
@@ -31,10 +31,9 @@
                   />
                 </svg>
               </div>
-              <div slot="emoji-picker" slot-scope="{ emojis, display }">
+              <div slot="emoji-picker" slot-scope="{ emojis}">
                 <div
                   class="emoji-picker"
-                  :style="{ top: display.y + 'px', left: display.x + 'px' }"
                 >
                   <div class="emoji-picker__search">
                     <input type="text" v-model="search" v-focus />
@@ -49,7 +48,7 @@
                         <span
                           v-for="(emoji, emojiName) in emojiGroup"
                           :key="emojiName"
-                          @click="append(emoji)"
+                          @click="insert(emoji)"
                           :title="emojiName"
                           >{{ emoji }}</span
                         >
@@ -60,9 +59,16 @@
               </div>
             </emoji-picker>
           </div>
-
+          <v-icon
+            class="icon_gif"
+            large
+            color="green lighten-2"
+            @click.stop="clickEvent"
+          >
+            mdi-gif
+          </v-icon>
           <div class="my-2">
-            <v-btn color="primary" dark> Poster </v-btn>
+            <v-btn color="light-blue lighten-1" dark>Poster</v-btn>
           </div>
         </div>
       </v-row>
@@ -79,7 +85,7 @@ export default {
     };
   },
   methods: {
-    append(emoji) {
+    insert(emoji) {
       this.input += emoji;
     },
   },
@@ -149,13 +155,14 @@ export default {
 /* EMojiPicker */
 
 .wrapper {
-  display: block;
+  position: relative;
+  display: inline-block;
 }
 
 .regular-input {
   padding: 0.5rem 1rem;
   border-radius: 3px;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(218, 218, 218);
   width: 20rem;
   height: 12rem;
   outline: none;
@@ -170,18 +177,21 @@ export default {
   border-radius: 50%;
   cursor: pointer;
   transition: all 0.2s;
+
 }
 .emoji-invoker:hover {
   transform: scale(1.1);
+  transition: all 0.2s;
 }
 .emoji-invoker > svg {
-  fill: #b1c6d0;
+  fill: rgb(230, 218, 56);
 }
 
 .emoji-picker {
+  position: absolute;
   z-index: 1;
   font-family: Inter;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(218, 218, 218);
   width: 15rem;
   height: 20rem;
   overflow: scroll;
@@ -189,7 +199,7 @@ export default {
   padding: 1rem;
   box-sizing: border-box;
   border-radius: 0.5rem;
-  background: #fff;
+  background: rgb(21, 32, 43);
 }
 .emoji-picker__search {
   display: flex;
@@ -197,14 +207,15 @@ export default {
 .emoji-picker__search > input {
   flex: 1;
   border-radius: 10rem;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(218, 218, 218);
   padding: 0.5rem 1rem;
   outline: none;
   width: 10rem;
+  color: rgb(218, 218, 218);
 }
 .emoji-picker h5 {
   margin-bottom: 0;
-  color: #818181;
+  color: rgb(218, 218, 218);
   text-transform: uppercase;
   font-size: 0.8rem;
   cursor: default;
@@ -224,7 +235,14 @@ export default {
   border-radius: 5px;
 }
 .emoji-picker .emojis span:hover {
-  background: #ececec;
+  background: rgba(66, 153, 225, 0.5);
   cursor: pointer;
+}
+
+.icon_gif{
+  &:hover{
+    transform: scale(1.1);
+    transition: ease-out 1s;
+  }
 }
 </style>
