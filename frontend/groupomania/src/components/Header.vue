@@ -17,11 +17,6 @@
         <div class="header_icon"><i class="fas fa-sign-out-alt"></i></div>
         <div class="header_icon-text"><a href="" class="header_link-profil">Déconnexion</a></div>
       </div>
-      <div class='header_link-post'>
-        <v-btn class="mx-2 btn_post" fab dark medium color="cyan">
-        <v-icon dark>mdi-pencil</v-icon>
-        </v-btn>
-      </div>
     </nav>
   </div>
 </template>
@@ -34,7 +29,7 @@
   .header{
     position: sticky;
     top: 0;
-    grid-row: 1 / 3;
+    grid-row: 1 / 5;
     grid-column: 1 / 2;
     display: flex;
     flex-direction: column;

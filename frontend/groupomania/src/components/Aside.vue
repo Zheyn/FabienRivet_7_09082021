@@ -12,7 +12,7 @@
     .container {
         
         height: 100%;
-        grid-row: 2 / 3;
+        grid-row: 2 / 5;
         grid-column: 3 / 4;
     }
     

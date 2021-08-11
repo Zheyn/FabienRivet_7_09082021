@@ -1,7 +1,7 @@
 <template>
-  
+  <v-app>
     <router-view/>
-    
+  </v-app>
 </template>
 
 <script>
@@ -17,7 +17,7 @@ export default {
 
 <style lang="scss">
 
-body{
+#app{
    font-family: Inter, sans-serif;
    background-color: rgb(21, 32, 43);
  }

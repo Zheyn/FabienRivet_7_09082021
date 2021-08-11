@@ -28,12 +28,13 @@
         justify-content: center;
         flex-direction: column;
         grid-column: 2 / 3;
-        grid-row: 2 / 3;
+        grid-row: 3 / 5;
+        border-left: .5px solid #e0e0e0;
+        border-right: .5px solid #e0e0e0;
     }
     p{
         width: 100%;
         padding-top: 100px;
-        border-left: .5px solid #e0e0e0;
-        border-right: .5px solid #e0e0e0;
+        
     }
 </style>
