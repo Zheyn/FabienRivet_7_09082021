@@ -3,7 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import vuetify from './plugins/vuetify'
-
+import { EmojiPickerPlugin } from 'vue-emoji-picker'
+Vue.use(EmojiPickerPlugin)
 Vue.config.productionTip = false
 
 new Vue({

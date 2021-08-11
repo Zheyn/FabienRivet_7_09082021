@@ -3,7 +3,7 @@
     <Header />
     <Accueil />
     <TextFields />
-    <MenuMessage />
+    
     <Wall />
     <Aside />
   </div>
@@ -15,13 +15,13 @@
   import Wall from '../components/Wall'
   import Accueil from '../components/Accueil'
   import TextFields from '../components/TextFields'
-  import MenuMessage from '../components/MenuMessage'
+  
 
   export default {
     name: 'Home',
 
     components: {
-      Header, Aside, Wall, Accueil, TextFields, MenuMessage
+      Header, Aside, Wall, Accueil, TextFields, 
         
     },
   }
