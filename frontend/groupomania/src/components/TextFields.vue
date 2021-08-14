@@ -61,7 +61,7 @@
           </div>
           <v-icon
             class="icon_gif"
-            large
+            
             color="green lighten-2"
             @click.stop="clickEvent"
           >
@@ -240,6 +240,7 @@ export default {
 }
 
 .icon_gif{
+  transform: scale(1.4);
   &:hover{
     transform: scale(1.1);
     transition: ease-out 1s;
