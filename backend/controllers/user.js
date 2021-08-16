@@ -1,6 +1,6 @@
 const User = require("../models/user.js");
 
-// Create and Save a new Customer
+// Créer et sauvegarde un nouvel utilisateur
 exports.create = (req, res) => {
   // Validate request
   if (!req.body) {
@@ -8,14 +8,13 @@ exports.create = (req, res) => {
       message: "Content can not be empty!"
     });
   }
-
-  // Create a Customer
+  // Créer un utilisateur
   const user = new User({
     email: req.body.email,
     name: req.body.name,
   });
 
-  // Save Customer in the database
+  // Sauvegarde un utilisateur
   User.create(user, (err, data) => {
     if (err)
       res.status(500).send({
