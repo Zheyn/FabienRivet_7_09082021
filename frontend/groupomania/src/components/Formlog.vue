@@ -7,6 +7,9 @@
         >
           <h1>Inscription</h1>
           <v-text-field
+            @keyup.enter="addForm"
+            class="name_form"
+            value="firstname"
             v-model="firstname"
             :rules="nameRules"
             :counter="10"
@@ -41,8 +44,19 @@
             @click:append="show1 = !show1"
           ></v-text-field>
           <div class="button_log">
-            <v-btn depressed color="primary" class="button_log-1"> S'inscrire </v-btn>
-            <v-btn depressed color="primary"> Se connecter </v-btn>
+            <router-link to="/Home">
+              <v-btn 
+              depressed 
+              color="primary" 
+              class="button_log-1"
+              >
+                S'inscrire
+              </v-btn>
+            </router-link>
+            <v-btn 
+            depressed 
+            class="button_log-2"
+            > Se connecter </v-btn>
           </div>
         </div>
       </v-row>
@@ -71,35 +85,57 @@ export default {
     show3: false,
     show4: false,
     password: "",
-
     passwordRules: [(v) => v.length >= 8 || "Minimum 8 charactères"],
+
   }),
+    methods:{
+      addForm () {
+        
+        console.log(this.firstname, this.lastname, this.email)     
+      }
+    }
 };
 </script>
 
 
-<style scoped>
+<style scoped lang="scss">
 .container {
   height: 50%;
   width: 80vw;
 }
 .container_log {
-  height: 50%;
-  width: 40vw;
+  height: 560px;
+  width: 30vw;
   border-radius: 50px;
   background-color: rgb(216, 216, 216);
+  & h1 {
+    color: rgb(32, 32, 32);
+    margin-bottom: 10px;
+    margin-top: 20px;
+    font-size: 1.8rem;
+  }
 }
 .col {
   height: 5px;
 }
 .row {
   height: 100vh;
-  transform: translateY(-15%);
+  transform: translateY(-10%);
 }
 .v-input {
   flex: none;
 }
-.button_log-1{
-  padding-right: 10px;
+.button_log{
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+.button_log-1 {
+  margin-right: 10px;
+  margin-top: 15px;
+}
+.button_log-2 {
+  background-color: #e91e63 !important;
+  color: azure !important;
+  margin-top: 15px;
 }
 </style>

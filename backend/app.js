@@ -2,7 +2,7 @@ const express = require('express'); // Importation du framework Express
 const app = express();
 const mysql = require('mysql');
 // Importations des routes
-// const userRoutes = require('./routes/user');
+const userRoutes = require('./routes/user');
 // const sauceRoutes = require('./routes/sauce');
 // const path = require('path'); // Plugin qui sert dans l'upload des images et permet de travailler avec les répertoires et chemin de fichier
 
@@ -35,8 +35,7 @@ app.use((req, res, next) => {
 
 // app.use('/images', express.static(path.join(__dirname, 'images'))); // Midleware qui permet de charger les fichiers qui sont dans le repertoire images
 
-// app.use('/api/auth', userRoutes);
 
-// app.use('/api/sauces', sauceRoutes);
+app.use('/api/user', userRoutes);
 
 module.exports = app; // Export de l'application
