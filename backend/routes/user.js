@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userCtrl = require('../controllers/user');
 
-router.post('/users', userCtrl);
+router.post('/', userCtrl.create);
 
 module.exports = router;
 

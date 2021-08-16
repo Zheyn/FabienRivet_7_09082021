@@ -19,15 +19,15 @@ export default {
 
 #app{
    font-family: Inter, sans-serif;
-   background-color: rgb(21, 32, 43);
+   background-color: #f5f7fa;
  }
  ::-webkit-scrollbar {
   width: 6px;
-  background: rgb(33, 49, 65);
+  background: #f5f7fa;
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(57, 83, 110);
+  background: #e91e63;
   border-radius: 2px;
 }
 </style>

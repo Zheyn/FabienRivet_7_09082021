@@ -99,6 +99,7 @@ export default {
 
 
 <style scoped lang="scss">
+@import "_formlog";
 .container {
   height: 50%;
   width: 80vw;
@@ -107,7 +108,9 @@ export default {
   height: 560px;
   width: 30vw;
   border-radius: 50px;
-  background-color: rgb(216, 216, 216);
+  background-color: #f5f7fa;
+  box-shadow: 0px 0px 24px -4px rgba(0,0,0,0.75);
+  animation: container_style 1s;
   & h1 {
     color: rgb(32, 32, 32);
     margin-bottom: 10px;

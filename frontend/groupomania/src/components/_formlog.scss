@@ -1,0 +1,18 @@
+@keyframes container_style{
+    0%{ 
+        transform: scale(0) 0.5s;
+        opacity: 0;
+    }
+    30%{ 
+        transform: scale(1.1);
+        box-shadow: 0px 0px 67px -4px rgba(0,0,0,0.75) 2s;
+ 
+    }
+    70%{ 
+        
+    }
+    100%{ 
+        transform: scale(1);
+        opacity: 1;
+    }
+}

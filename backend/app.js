@@ -1,26 +1,8 @@
 const express = require('express'); // Importation du framework Express
 const app = express();
-//const mysql = require('mysql');
-// Importations des routes
+
 const userRoutes = require('./routes/user');
-// const sauceRoutes = require('./routes/sauce');
-// const path = require('path'); // Plugin qui sert dans l'upload des images et permet de travailler avec les répertoires et chemin de fichier
 
-
-// require('dotenv').config();
-// Connexion à la base de données mongoDB et utilisation de process.env pour récupérer les informations de connexion caché dans le fichier .env (variable d'environnement)
-// Installation du package dotenv - npm install dotenv
-// const db = mysql.createConnection({
-
-//   host: "localhost",
-//   user: "root",
-
-// });
-// db.connect(function(err) {
-//   if (err) throw err;
-//   console.log("Connecté à la base de données MySQL!");
-// });
-// Middleware pour transformer le corps de la requête en JSON en objet JS.
 app.use(express.urlencoded({extended: true}));
 app.use(express.json())
 

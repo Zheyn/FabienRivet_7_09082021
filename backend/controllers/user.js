@@ -9,6 +9,7 @@ exports.create = (req, res) => {
     });
   }
   // Créer un utilisateur
+  console.log(req.body)
   const user = new User({
     email: req.body.email,
     name: req.body.name,

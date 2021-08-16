@@ -108,7 +108,7 @@ export default {
   top: 55px;
   border-left: 0.5px solid rgb(218, 218, 218);
   border-right: 0.5px solid rgb(218, 218, 218);
-  background-color: rgb(21, 32, 43);
+  background-color: #f5f7fa;
 }
 .text_area {
   height: 100px;
@@ -126,7 +126,7 @@ export default {
   width: 100%;
   position: sticky;
   top: 205px;
-  background-color: rgb(21, 32, 43);
+  background-color: #f5f7fa;
   grid-row: 3 / 4;
   grid-column: 2 / 3;
   border-bottom: 0.5px solid rgb(218, 218, 218);
@@ -179,7 +179,7 @@ export default {
   padding: 1rem;
   box-sizing: border-box;
   border-radius: 0.5rem;
-  background: rgb(21, 32, 43);
+  background: #f5f7fa;
 }
 .emoji-picker__search {
   display: flex;

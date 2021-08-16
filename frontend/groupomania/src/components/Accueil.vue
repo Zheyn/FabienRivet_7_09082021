@@ -8,7 +8,7 @@
 
 <style scoped>
     h1{
-    background-color: rgb(21, 32, 43);
+    background-color: #f5f7fa;
     color: rgb(218, 218, 218);
     border-bottom: .5px solid rgb(218, 218, 218);
     border-left: .5px solid rgb(218, 218, 218);
