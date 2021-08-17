@@ -43,20 +43,31 @@
             counter
             @click:append="show1 = !show1"
           ></v-text-field>
+
+          <!-- <v-text-field
+            v-on:blur="validate"
+            v-model="password2"
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="passwordRules"
+            :type="show1 ? 'text' : 'password'"
+            name="input-10-1"
+            label="Confirmer mot de passe"
+            hint="Au moins 8 charactères"
+            counter
+            @click:append="show1 = show1"
+          ></v-text-field> -->
+
           <div class="button_log">
             <router-link to="/Home">
               <v-btn 
-              depressed 
-              color="primary" 
+              depressed color="primary" 
               class="button_log-1"
+              @click="addForm"
               >
                 S'inscrire
               </v-btn>
             </router-link>
-            <v-btn 
-            depressed 
-            class="button_log-2"
-            > Se connecter </v-btn>
+            <v-btn depressed class="button_log-2"> Se connecter </v-btn>
           </div>
         </div>
       </v-row>
@@ -81,19 +92,37 @@ export default {
     ],
 
     show1: false,
-    show2: true,
-    show3: false,
-    show4: false,
     password: "",
+    // password2: "",
     passwordRules: [(v) => v.length >= 8 || "Minimum 8 charactères"],
-
   }),
-    methods:{
-      addForm () {
-        
-        console.log(this.firstname, this.lastname, this.email)     
-      }
-    }
+  methods: {
+    addForm() {
+      let valueForm = {
+        firstname: this.firstname,
+        lastname: this.lastname,
+        email: this.email,
+        password: this.password,
+      };
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(valueForm),
+      };
+      fetch("http://localhost:3000/api/user/", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data)
+        });
+      console.log(this.firstname, this.lastname, this.email);
+    },
+    // toggle: function(todo){
+    //     todo.done = !todo.done
+    // },
+    // validate: function() {
+    //     console.log(this.password === this.password2)
+    // }
+  },
 };
 </script>
 
@@ -109,7 +138,7 @@ export default {
   width: 30vw;
   border-radius: 50px;
   background-color: #f5f7fa;
-  box-shadow: 0px 0px 24px -4px rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 24px -4px rgba(0, 0, 0, 0.75);
   animation: container_style 1s;
   & h1 {
     color: rgb(32, 32, 32);
@@ -128,7 +157,7 @@ export default {
 .v-input {
   flex: none;
 }
-.button_log{
+.button_log {
   margin-bottom: 30px;
   margin-top: 20px;
 }
