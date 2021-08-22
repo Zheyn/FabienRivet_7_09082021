@@ -5,10 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    username: ''
   },
   mutations: {
+    ADD_USERNAME(state, data) {
+      state.username = data.user
+    }
   },
   actions: {
+    
   },
   modules: {
   }

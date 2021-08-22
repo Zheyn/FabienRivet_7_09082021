@@ -1,27 +1,17 @@
 <template>
-  <v-form v-model="valid">
+  <v-form v-model="valid" ref="form">
     <v-container fluid>
       <v-row class="row d-flex align-center justify-center">
         <div
           class="container_log d-flex justify-center align-center flex-column"
         >
           <h1>Inscription</h1>
-          <v-text-field
-            @keyup.enter="addForm"
-            class="name_form"
-            value="firstname"
-            v-model="firstname"
-            :rules="nameRules"
-            :counter="10"
-            label="Nom"
-            required
-          ></v-text-field>
 
           <v-text-field
-            v-model="lastname"
+            v-model="username"
             :rules="nameRules"
             :counter="10"
-            label="Prénom"
+            label="Nom d'utilisateur"
             required
           ></v-text-field>
 
@@ -37,37 +27,38 @@
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="passwordRules"
             :type="show1 ? 'text' : 'password'"
-            name="input-10-1"
+            name="password"
             label="Mot de passe"
-            hint="Au moins 8 charactères"
+            hint="8 charactères"
             counter
             @click:append="show1 = !show1"
           ></v-text-field>
 
-          <!-- <v-text-field
-            v-on:blur="validate"
+          <v-text-field
             v-model="password2"
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
             :rules="passwordRules"
             :type="show1 ? 'text' : 'password'"
-            name="input-10-1"
+            name="confirmation"
             label="Confirmer mot de passe"
-            hint="Au moins 8 charactères"
+            hint="8 charactères"
             counter
             @click:append="show1 = show1"
-          ></v-text-field> -->
+          ></v-text-field>
 
           <div class="button_log">
-            <router-link to="/Home">
-              <v-btn 
-              depressed color="primary" 
-              class="button_log-1"
-              @click="addForm"
+              <v-btn
+                :disabled="!valid"
+                depressed
+                color="primary"
+                class="button_log-1"
+                @click="addForm"
               >
                 S'inscrire
               </v-btn>
-            </router-link>
+            <router-link to="/Login" class="link_btn">
             <v-btn depressed class="button_log-2"> Se connecter </v-btn>
+             </router-link>
           </div>
         </div>
       </v-row>
@@ -78,29 +69,33 @@
 <script>
 export default {
   data: () => ({
-    valid: false,
-    firstname: "",
-    lastname: "",
+    valid: true,
+    username: "",
     nameRules: [
       (v) => !!v || "Le nom est requis",
-      (v) => v.length <= 10 || "Le nom doit comporter moins de 10 caractères",
+      (v) => v.length <= 10 || "Min. 10 caractères",
     ],
     email: "",
     emailRules: [
       (v) => !!v || "Un e-mail est requis",
-      (v) => /.+@.+/.test(v) || "L'email doit être valide",
+      (v) => /.+@.+/.test(v) || "Email non valide",
     ],
 
     show1: false,
     password: "",
-    // password2: "",
-    passwordRules: [(v) => v.length >= 8 || "Minimum 8 charactères"],
+    password2: "",
+    passwordRules: [
+      (v) => v.length >= 8 || "Min. 8 charactères",
+      (v) => !!v || "Mot de passe requis",
+    ],
   }),
   methods: {
+    validate() {
+      this.$refs.form.validate();
+    },
     addForm() {
       let valueForm = {
-        firstname: this.firstname,
-        lastname: this.lastname,
+        username: this.username,
         email: this.email,
         password: this.password,
       };
@@ -109,19 +104,16 @@ export default {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(valueForm),
       };
-      fetch("http://localhost:3000/api/user/signup", requestOptions)
+      fetch("http://localhost:3000/api/users/register/", requestOptions)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data)
+          if (data.userId) {
+            document.location.href = "#/Home";
+          }
+          console.log(data);
         });
-      console.log(this.firstname, this.lastname, this.email);
+      console.log(valueForm);
     },
-    // toggle: function(todo){
-    //     todo.done = !todo.done
-    // },
-    // validate: function() {
-    //     console.log(this.password === this.password2)
-    // }
   },
 };
 </script>
@@ -134,7 +126,7 @@ export default {
   width: 80vw;
 }
 .container_log {
-  height: 560px;
+  height: 450px;
   width: 30vw;
   border-radius: 50px;
   background-color: #f5f7fa;
@@ -169,5 +161,11 @@ export default {
   background-color: #e91e63 !important;
   color: azure !important;
   margin-top: 15px;
+}
+.link_btn {
+  text-decoration: none;
+}
+.theme--light.v-btn.v-btn--disabled.v-btn--has-bg {
+  background-color: rgba(92, 92, 92, 0.897) !important;
 }
 </style>

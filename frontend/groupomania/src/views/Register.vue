@@ -1,19 +1,19 @@
 <template>
     <div class="container_form_log">
-        <FormLogin />
+        <FormRegister />
     </div>
 </template>
 
 <script>
-  import FormLogin from '../components/FormLogin'
+  import FormRegister from '../components/FormRegister'
   
   
 
   export default {
-    name: 'Login',
+    name: 'Register',
 
     components: {
-      FormLogin
+      FormRegister 
         
     },
   }

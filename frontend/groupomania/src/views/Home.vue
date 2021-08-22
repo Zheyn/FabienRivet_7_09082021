@@ -1,19 +1,14 @@
 <template>
   <div class="container">
     <Header />
-    <Accueil />
     <TextFields />
-    
     <Wall />
-    <Aside />
   </div>
 </template>
 
 <script>
   import Header from '../components/Header'
-  import Aside from '../components/Aside'
   import Wall from '../components/Wall'
-  import Accueil from '../components/Accueil'
   import TextFields from '../components/TextFields'
   
 
@@ -21,7 +16,7 @@
     name: 'Home',
 
     components: {
-      Header, Aside, Wall, Accueil, TextFields, 
+      Header, Wall, TextFields, 
         
     },
   }
@@ -30,9 +25,10 @@
 <style scoped>
   .container {
     display: grid;
-    grid-template-columns: 30% auto 30%;
+    grid-template-columns: 20% 50%;
     grid-template-rows: 55px 150px 60px auto;
     padding: 0;
+    background-color: #f5f7fa;
   }
   
 </style>

@@ -16,7 +16,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+html{
+  background-color: #f5f7fa;
+}
 #app{
    font-family: Inter, sans-serif;
    background-color: #f5f7fa;
@@ -27,7 +29,7 @@ export default {
   border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb {
-  background: #e91e63;
+  background: #4d4c4c;
   border-radius: 2px;
 }
 </style>

@@ -1,26 +1,23 @@
 <template>
     <div class="container_form_log">
-        <FormLogin />
+        <Startcomp />
     </div>
 </template>
 
 <script>
-  import FormLogin from '../components/FormLogin'
+  import Startcomp from '../components/Startcomp'
   
   
 
   export default {
-    name: 'Login',
+    name: 'Start',
 
     components: {
-      FormLogin
-        
+       Startcomp
     },
   }
 </script>
 
 <style scoped>
-    .container_form_log{
-        height: 100%;
-    }
+  
 </style>
