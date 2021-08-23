@@ -38,7 +38,7 @@
   & .header_link-profil {
     display: block;
     width: 100%;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     text-decoration: none;
     color: rgb(0, 0, 0);
   }

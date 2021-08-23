@@ -29,7 +29,7 @@
             :type="show1 ? 'text' : 'password'"
             name="password"
             label="Mot de passe"
-            hint="8 charactères"
+            hint="8 caractères"
             counter
             @click:append="show1 = !show1"
           ></v-text-field>
@@ -41,7 +41,7 @@
             :type="show1 ? 'text' : 'password'"
             name="confirmation"
             label="Confirmer mot de passe"
-            hint="8 charactères"
+            hint="8 caractères"
             counter
             @click:append="show1 = show1"
           ></v-text-field>
@@ -85,7 +85,7 @@ export default {
     password: "",
     password2: "",
     passwordRules: [
-      (v) => v.length >= 8 || "Min. 8 charactères",
+      (v) => v.length >= 8 || "Min. 8 caractères",
       (v) => !!v || "Mot de passe requis",
     ],
   }),

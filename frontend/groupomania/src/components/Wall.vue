@@ -2,7 +2,7 @@
   <div class="container_wall">
     <div class="card_message">
       <p class="profil_content">
-          <span class="username_profile">Zheyn</span> 22/08/2021
+          <span class="username_profile"> {{ $store.state.username }} </span> 22/08/2021
       </p>
       <p class='text_content'>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed voluptatem,

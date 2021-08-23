@@ -70,6 +70,8 @@
 </template>
 
 <script>
+import store from '../store'
+const token = store.getters.getToken
 export default {
   data: function () {
     return {
@@ -91,7 +93,7 @@ export default {
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json", 
-                    'Authorization': "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2Mjk2NDkwOTEsImV4cCI6MTYyOTczNTQ5MX0.u9auHFhlvhUScOR-ngVaiVil00imp5C7aUBLiqNvQmw"
+                    'Authorization': "Bearer " + token
                   },
         body: JSON.stringify(valueMessage),
       };
