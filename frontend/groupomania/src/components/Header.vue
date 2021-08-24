@@ -28,6 +28,8 @@
 
 <style  lang="scss">
 .header {
+  position: sticky;
+  top: 0;
   grid-row: 1 / 5;
   grid-column: 1 / 2;
   display: flex;
@@ -48,8 +50,6 @@
   }
   .header_link {
     width: 100%;
-    position: sticky;
-    top: 0;
   }
   .header_link-all {
     display: flex;

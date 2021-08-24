@@ -70,8 +70,7 @@
 </template>
 
 <script>
-import store from '../store'
-const token = store.getters.getToken
+import { mapGetters } from 'vuex'
 export default {
   data: function () {
     return {
@@ -93,7 +92,7 @@ export default {
       const requestOptions = {
         method: "POST",
         headers: { "Content-Type": "application/json", 
-                    'Authorization': "Bearer " + token
+                    'Authorization': "Bearer " + this.$store.getters.getToken
                   },
         body: JSON.stringify(valueMessage),
       };
@@ -102,7 +101,18 @@ export default {
         .then((data) => {
           console.log(data)
         })
+      fetch("http://localhost:3000/api/messages/")
+        .then((response) => response.json())
+        .then((data2) => {
+          this.$store.commit('ADD_MESSAGES', data2);
+          console.log(data2)
+        })
     }
+  },
+  computed: {
+    ...mapGetters([
+      'getToken'
+    ])
   },
   directives: {
     focus: {

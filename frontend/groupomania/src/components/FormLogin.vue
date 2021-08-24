@@ -26,18 +26,6 @@
             @click:append="show1 = !show1"
           ></v-text-field>
 
-          <v-text-field
-            v-model="password2"
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="passwordRules"
-            :type="show1 ? 'text' : 'password'"
-            name="confirmation"
-            label="Confirmer mot de passe"
-            hint="8 caractères"
-            counter
-            @click:append="show1 = show1"
-          ></v-text-field>
-
           <div class="button_log">
             <router-link to="/Register" class="link_btn">
               <v-btn depressed color="primary" class="button_log-1">
@@ -105,6 +93,12 @@ export default {
           console.log(data);
         });
       console.log(valueForm);
+      fetch("http://localhost:3000/api/messages/")
+        .then((response) => response.json())
+        .then((data2) => {
+          this.$store.commit('ADD_MESSAGES', data2);
+          console.log(data2)
+        })
     },
   },
 };

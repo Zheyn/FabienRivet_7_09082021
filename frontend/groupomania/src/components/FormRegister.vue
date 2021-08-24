@@ -35,9 +35,8 @@
           ></v-text-field>
 
           <v-text-field
-            v-model="password2"
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="passwordRules"
+            :rules="passwordConfirm"
             :type="show1 ? 'text' : 'password'"
             name="confirmation"
             label="Confirmer mot de passe"
@@ -47,18 +46,18 @@
           ></v-text-field>
 
           <div class="button_log">
-              <v-btn
-                :disabled="!valid"
-                depressed
-                color="primary"
-                class="button_log-1"
-                @click="addForm"
-              >
-                S'inscrire
-              </v-btn>
+            <v-btn
+              :disabled="!valid"
+              depressed
+              color="primary"
+              class="button_log-1"
+              @click="addForm"
+            >
+              S'inscrire
+            </v-btn>
             <router-link to="/Login" class="link_btn">
-            <v-btn depressed class="button_log-2"> Se connecter </v-btn>
-             </router-link>
+              <v-btn depressed class="button_log-2"> Se connecter </v-btn>
+            </router-link>
           </div>
         </div>
       </v-row>
@@ -68,27 +67,31 @@
 
 <script>
 export default {
-  data: () => ({
-    valid: true,
-    username: "",
-    nameRules: [
-      (v) => !!v || "Le nom est requis",
-      (v) => v.length <= 10 || "Min. 10 caractères",
-    ],
-    email: "",
-    emailRules: [
-      (v) => !!v || "Un e-mail est requis",
-      (v) => /.+@.+/.test(v) || "Email non valide",
-    ],
-
-    show1: false,
-    password: "",
-    password2: "",
-    passwordRules: [
-      (v) => v.length >= 8 || "Min. 8 caractères",
-      (v) => !!v || "Mot de passe requis",
-    ],
-  }),
+  data() {
+    return {
+      valid: true,
+      username: "",
+      nameRules: [
+        (v) => !!v || "Le nom est requis",
+        (v) => v.length <= 10 || "Min. 10 caractères",
+      ],
+      email: "",
+      emailRules: [
+        (v) => !!v || "Un e-mail est requis",
+        (v) => /.+@.+/.test(v) || "Email non valide",
+      ],
+      show1: false,
+      password: "",
+      passwordRules: [
+        (v) => v.length >= 8 || "Min. 8 caractères",
+        (v) => !!v || "Mot de passe requis",
+      ],
+      passwordConfirm: [
+        (v) => !!v || "Confimer votre mot de passe",
+        (v) => v === this.password || "Mot de passe incorrect",
+      ],
+    };
+  },
   methods: {
     validate() {
       this.$refs.form.validate();
