@@ -12,19 +12,19 @@ export default new Vuex.Store({
     messages: []
   },
   mutations: {
-    ADD_USERNAME(state, data) {
+    ADD_USERNAME(state, data) { // renommer
       state.username = data.user;
       state.token = data.token;
+      state.isAdmin = data.isAdmin
     },
     ADD_MESSAGES(state, data) {
       state.messages = data
-      // state.messages.title = data.title;
-      // state.messages.username = data.user
     }
   },
   getters: {
     getToken: (state) => state.token,
-    getMessages: (state) => state.messages
+    getMessages: (state) => state.messages,
+    getAdmin: (state) => state.isAdmin
   },
   actions: {},
   modules: {},

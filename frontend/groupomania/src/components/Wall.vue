@@ -2,19 +2,25 @@
   <div class="container_wall">
     <div
       v-for="getMessage in getMessages"
-      :key="getMessage"
+      :key="getMessage.id"
       class="card_message"
     >
-      <p class="profil_content">
-        <span class="username_profile"> {{ getMessage.User.username }} </span>
-        <span class="date"> {{ getMessage.createdAt }}</span>
-      </p>
+      <div class="info-message d-flex justify-space-between">
+        <p class="profil_content">
+          <span class="username_profile"> {{ getMessage.User.username }} </span>
+          <span class="date"> {{ getMessage.createdAt }}</span>
+          <span class="message-id"> {{ getMessage.id }}</span>
+        </p>
+        <v-btn  @click="idMessage(getMessage.id)" v-if="getAdmin" text icon color="red lighten-2"
+          ><v-icon>mdi-delete-forever</v-icon></v-btn
+        >
+      </div>
       <p class="text_content">
         {{ getMessage.content }}
       </p>
       <div class="likes d-flex justify-end">
         <v-btn disabled class="ma-2" text icon color="blue lighten-2">
-          <v-icon>mdi-thumb-up</v-icon>
+          <v-icon>mdi-thumb-up </v-icon>
         </v-btn>
       </div>
     </div>
@@ -24,8 +30,28 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
+  methods: {
+    idMessage(messageId) {
+      let idMessage = {
+      id: messageId
+      }
+      console.log(idMessage)
+      const requestOptions = {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json",
+                   'Authorization': "Bearer " + this.$store.getters.getToken
+                  },
+        body: JSON.stringify(idMessage),
+      };
+      fetch("http://localhost:3000/api/messages/destroy/", requestOptions)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Response data id message', data)
+        });
+    }
+  },
   computed: {
-    ...mapGetters(["getMessages"]),
+    ...mapGetters(["getMessages", "getAdmin"]),
   },
 };
 </script>

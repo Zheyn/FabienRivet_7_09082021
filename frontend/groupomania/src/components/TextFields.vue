@@ -54,15 +54,13 @@
             </div>
           </emoji-picker>
         </div>
-        <v-icon
-          class="icon_gif"
-          color="green lighten-2"
-          @click.stop="clickEvent"
-        >
-          mdi-gif
-        </v-icon>
+        <div class="file-input">
+          <v-file-input v-model="fileInput" accept="image/*" label="File input"></v-file-input>
+        </div>
         <div class="my-2">
-          <v-btn @click="addMessage"  color="light-blue lighten-1" dark>Poster</v-btn>
+          <v-btn @click="addMessage" color="light-blue lighten-1" dark
+            >Poster</v-btn
+          >
         </div>
       </div>
     </v-container>
@@ -70,10 +68,11 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 export default {
   data: function () {
     return {
+      fileInput: "",
       content: "",
       search: "",
       rules: [(v) => v.length <= 255 || "Max 255 caractères"],
@@ -87,32 +86,31 @@ export default {
       let valueMessage = {
         content: this.content,
         title: "",
-        likes: ""
+        likes: "",
       };
       const requestOptions = {
         method: "POST",
-        headers: { "Content-Type": "application/json", 
-                    'Authorization': "Bearer " + this.$store.getters.getToken
-                  },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.$store.getters.getToken,
+        },
         body: JSON.stringify(valueMessage),
       };
       fetch("http://localhost:3000/api/messages/new/", requestOptions)
         .then((response) => response.json())
         .then((data) => {
-          console.log(data)
-        })
+          console.log(data);
+        });
       fetch("http://localhost:3000/api/messages/")
         .then((response) => response.json())
         .then((data2) => {
-          this.$store.commit('ADD_MESSAGES', data2);
-          console.log(data2)
-        })
-    }
+          this.$store.commit("ADD_MESSAGES", data2);
+          console.log(data2);
+        });
+    },
   },
   computed: {
-    ...mapGetters([
-      'getToken'
-    ])
+    ...mapGetters(["getToken"]),
   },
   directives: {
     focus: {
@@ -140,7 +138,7 @@ export default {
   width: 100%;
   position: sticky;
 }
-#textarea{
+#textarea {
   height: 100px !important;
 }
 /******* EMojiPicker ******/
@@ -235,5 +233,8 @@ export default {
     transform: scale(1.1);
     transition: ease-out 1s;
   }
+}
+.file-input {
+  width: 40%;
 }
 </style>

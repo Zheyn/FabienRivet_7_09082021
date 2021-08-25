@@ -88,5 +88,42 @@ module.exports = {
             console.log(err);
             res.status(500).json({ 'error': 'invalid fields'});
         });
+    },
+    destroyMessage: function (req, res) {
+        let headerAuth = req.headers['authorization'];
+        let userId = jwtUtils.getUserId(headerAuth);
+
+        asyncLib.waterfall([
+            function(done) {
+                models.User.findOne({
+                    where: { id: userId }
+                })
+                .then(function(userFound) {
+                    done(null, userFound);
+                })
+                .catch(function(err) {
+                    return res.status(500).json({ 'error': 'unable to verify user'})
+                });
+            },
+            function(userFound, done) {
+                if(userFound) {
+                    let messageId = req.body.id;
+                    models.Message.destroy({
+                        where: { id: messageId }
+                    })
+                    .then(function(destroyMessage) {
+                        done(destroyMessage);
+                    });
+                } else {
+                    res.status(404).json({ 'error': 'user not found'});
+                }
+            },
+        ], function(destroyMessage) {
+            if (destroyMessage) {
+                return res.status(201).json(destroyMessage);
+            } else {
+                return res.status(500).json({ 'error': 'cannot destroy message'});
+            }
+        });
     }
 }

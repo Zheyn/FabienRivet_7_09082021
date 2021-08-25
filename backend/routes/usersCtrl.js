@@ -64,6 +64,7 @@ module.exports = {
                 bcrypt.compare(password, userFound.password, function(errBycrypt, resBycrypt) {
                     if(resBycrypt) {
                         return res.status(200).json({
+                            'isAdmin': userFound.isAdmin,
                             'user': userFound.username,
                             'userId': userFound.id,
                             'token': jwtUtils.generateTokenForUser(userFound)
