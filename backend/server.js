@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const apiRouter = require('./apiRouter').router;
+const path = require('path');
 
 // Instantiate server
 const server = express();
@@ -14,6 +15,9 @@ server.use((req, res, next) => {
 // Body-parser config
 server.use(bodyParser.urlencoded({ extended: true}));
 server.use(bodyParser.json());
+
+//multer
+//server.use('/images', express.static(path.join(__dirname, 'images')));
 
 // Configure routes
 server.get('/', function (req, res) {

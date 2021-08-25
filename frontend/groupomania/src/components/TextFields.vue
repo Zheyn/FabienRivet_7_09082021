@@ -87,6 +87,7 @@ export default {
         content: this.content,
         title: "",
         likes: "",
+        attachment: this.fileInput
       };
       const requestOptions = {
         method: "POST",
