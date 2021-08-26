@@ -80,7 +80,7 @@ export default {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(valueForm),
       };
-      fetch("http://localhost:3000/api/users/login/", requestOptions)
+      fetch("http://localhost:3000/api/auth/login/", requestOptions)
         .then((response) => response.json())
         .then((data) => {
             if (data.userId) {
@@ -93,12 +93,12 @@ export default {
           console.log(data);
         });
       console.log(valueForm);
-      fetch("http://localhost:3000/api/messages/")
-        .then((response) => response.json())
-        .then((data2) => {
-          this.$store.commit('ADD_MESSAGES', data2);
-          console.log(data2)
-        })
+      // fetch("http://localhost:3000/api/messages/")
+      //   .then((response) => response.json())
+      //   .then((data2) => {
+      //     this.$store.commit('ADD_MESSAGES', data2);
+      //     console.log(data2)
+      //   })
     },
   },
 };

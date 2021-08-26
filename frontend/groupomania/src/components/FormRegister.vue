@@ -107,7 +107,7 @@ export default {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(valueForm),
       };
-      fetch("http://localhost:3000/api/users/register/", requestOptions)
+      fetch("http://localhost:3000/api/auth/register/", requestOptions)
         .then((response) => response.json())
         .then((data) => {
           if (data.userId) {
