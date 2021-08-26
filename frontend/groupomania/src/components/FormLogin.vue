@@ -84,7 +84,7 @@ export default {
         .then((response) => response.json())
         .then((data) => {
             if (data.userId) {
-                this.$store.commit('ADD_USERNAME', data);
+                this.$store.commit('ADD_PROFILE', data);
                 document.location.href = "#/Home";
             } else {
                 alert('MDP ko')
