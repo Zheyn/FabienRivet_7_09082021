@@ -10,7 +10,7 @@
       <div class="header_link-all">
         <div class="header_icon"><i class="fas fa-user"></i></div>
         <div class="header_icon-text">
-          <a href="" class="header_link-profil">Profil</a>
+          <router-link to="/Profile" class="header_link-profil">Profil</router-link>
         </div>
       </div>
       <div class="header_link-all">

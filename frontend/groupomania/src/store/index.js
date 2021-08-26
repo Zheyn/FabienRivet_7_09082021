@@ -24,7 +24,8 @@ export default new Vuex.Store({
   getters: {
     getToken: (state) => state.token,
     getMessages: (state) => state.messages,
-    getAdmin: (state) => state.isAdmin
+    getAdmin: (state) => state.isAdmin,
+    getProfile: (state) => state.username
   },
   actions: {},
   modules: {},

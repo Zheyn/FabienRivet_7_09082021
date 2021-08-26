@@ -93,12 +93,12 @@ export default {
           console.log(data);
         });
       console.log(valueForm);
-      // fetch("http://localhost:3000/api/messages/")
-      //   .then((response) => response.json())
-      //   .then((data2) => {
-      //     this.$store.commit('ADD_MESSAGES', data2);
-      //     console.log(data2)
-      //   })
+      fetch("http://localhost:3000/api/messages/list")
+        .then((response) => response.json())
+        .then((data2) => {
+          this.$store.commit('ADD_MESSAGES', data2);
+          console.log(data2)
+        })
     },
   },
 };

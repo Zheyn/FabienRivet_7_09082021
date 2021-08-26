@@ -20,32 +20,30 @@
             color="red lighten-2"
             ><v-icon>mdi-delete-forever</v-icon></v-btn
           >
-          <v-switch 
-          v-model="getMessage.switch1"
-          
-          ></v-switch>
+          <v-switch v-model="getMessage.switch1"></v-switch>
         </div>
       </div>
       <p v-if="!getMessage.switch1" class="text_content">
         {{ getMessage.content }}
       </p>
-      <v-textarea
-        v-if="getMessage.switch1"
-        :rules="rules"
-        counter="255"
-        v-model="getMessage.content"
-        class="text_area"
-        color="black"
-        no-resize
-      ></v-textarea>
-      <v-btn
-            @click="modify(getMessage)"
-            v-if="getAdmin"
-            text
-            icon
-            color="red lighten-2"
-            ><v-icon>mdi-delete-forever</v-icon></v-btn
-          >
+      <div class="text_area-modify d-flex align-center justify-center">
+        <v-textarea
+          v-if="getMessage.switch1"
+          :rules="rules"
+          counter="255"
+          v-model="getMessage.content"
+          class="text_area-switch"
+          color="black"
+          no-resize
+        ></v-textarea>
+        <v-btn
+          @click="modify(getMessage)"
+          v-if="getAdmin & getMessage.switch1"
+          color="primary"
+        >
+          Modifier
+        </v-btn>
+      </div>
       <div class="likes d-flex justify-end">
         <v-btn disabled class="ma-2" text icon color="blue lighten-2">
           <v-icon>mdi-thumb-up </v-icon>
@@ -67,7 +65,6 @@ export default {
   },
   methods: {
     modify(message) {
-       
       const requestOptions = {
         method: "PUT",
         headers: {
@@ -80,7 +77,7 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           console.log("Response data id message", data);
-          message.switch1 = false
+          message.switch1 = false;
         });
     },
     idMessage(messageId) {
@@ -134,5 +131,8 @@ export default {
 }
 .likes {
   padding: 0px 15px 0 0;
+}
+.text_area-modify{
+  width: 95%;
 }
 </style>

@@ -97,12 +97,12 @@ export default {
         },
         body: JSON.stringify(valueMessage),
       };
-      fetch("http://localhost:3000/api/messages/new/", requestOptions)
+      fetch("http://localhost:3000/api/messages/create/", requestOptions)
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
         });
-      fetch("http://localhost:3000/api/messages/")
+      fetch("http://localhost:3000/api/messages/list")
         .then((response) => response.json())
         .then((data2) => {
           this.$store.commit("ADD_MESSAGES", data2);
@@ -125,6 +125,7 @@ export default {
 
 <style scoped lang="scss">
 .text_fields {
+  z-index: 1;
   padding: 20px 20px 0 20px;
   height: 270px;
   position: sticky;
@@ -173,7 +174,7 @@ export default {
   transition: all 0.2s;
 }
 .emoji-invoker > svg {
-  fill: rgb(230, 218, 56);
+  fill: rgb(184, 177, 91);
 }
 
 .emoji-picker {

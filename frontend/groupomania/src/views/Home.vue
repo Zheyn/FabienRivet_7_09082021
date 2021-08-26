@@ -11,7 +11,6 @@
   import Wall from '../components/Wall'
   import TextFields from '../components/TextFields'
   
-
   export default {
     name: 'Home',
 
