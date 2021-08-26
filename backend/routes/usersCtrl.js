@@ -9,7 +9,7 @@ module.exports = {
         const email = req.body.email;
         const username = req.body.username;
         const password = req.body.password;
-
+        console.log(req)
         if (email == null || username == null || password == null) {
             return res.status(400).json({ 'error': 'missing parameters'});
         }

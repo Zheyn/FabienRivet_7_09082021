@@ -108,13 +108,16 @@ module.exports = {
             where: { id: userId },
           })
             .then(function (userFound) {
+              console.log("COUCOU3333");
               done(null, userFound);
             })
             .catch(function (err) {
+              console.log("COUCOU22222");
               return res.status(500).json({ error: "unable to verify user" });
             });
         },
         function (userFound, done) {
+          console.log("COUCOU4444");
           if (userFound) {
             let messageId = req.body.id;
             models.Message.destroy({
@@ -145,28 +148,28 @@ module.exports = {
     let content = req.body.content;
     let messageId = req.body.messageId;
     //let attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-
+    console.log(userId);
     asyncLib.waterfall(
       [
         function (done) {
-          models.User.findOne({
-            where: { id: userId },
-          })
+          models.User.findByPk(userId)
             .then(function (userFound) {
               done(null, userFound);
             })
             .catch(function (err) {
+              console.log(err);
               return res.status(500).json({ error: "unable to verify user" });
             });
         },
         function (userFound, done) {
+          console.log("COUCOU");
           if (userFound) {
-            Message.update({
-                where: { id: messageId },
-                content: content,
-            }).then(function(updateMessage) {
-                done(updateMessage);
-            })
+            models.Message.update(
+              { content: content },
+              { where: { id: req.body.id } }
+            ).then(function (updateMessage) {
+              done(updateMessage);
+            });
           } else {
             res.status(404).json({ error: "user not found" });
           }
