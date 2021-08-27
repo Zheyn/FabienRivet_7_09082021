@@ -38,7 +38,7 @@
         ></v-textarea>
         <v-btn
           @click="modify(getMessage)"
-          v-if="getAdmin & getMessage.switch1"
+          v-if="getMessage.switch1"
           color="primary"
         >
           Modifier

@@ -1,42 +1,12 @@
-// const express = require('express');
-// const messagesCtrl = require('../controllers/messagesCtrl')
-// const auth = require('../middleware/auth')
-
-
-// // Router
-// exports.router = (function() {
-//     const apiRouter = express.Router();
-
-//     //Users routes
-//     apiRouter.route('/users/register/').post(usersCtrl.register);
-//     apiRouter.route('/users/login/').post(usersCtrl.login);
-//     apiRouter.route('/users/profile/').get(usersCtrl.getUserProfile);
-
-//     //Messages routes
-//     apiRouter.route('/messages/new/').post(auth, messagesCtrl.createMessage);
-//     apiRouter.route('/messages/').get(messagesCtrl.listMessage);
-//     apiRouter.route('/messages/destroy/').delete(messagesCtrl.destroyMessage);
-//     apiRouter.route('/messages/modify/').put(messagesCtrl.modifyMessage)
-
-    
-
-//     return apiRouter;
-// })();
-
-
 const express = require('express');
 const router = express.Router(); 
 //const auth = require('../middleware/auth')
 const messageCtrl = require('../controllers/messagesCtrl');
+const multer = require('../middleware/multer-config')
 
-//const multer = require('../middleware/multer-config')
-
-router.post('/create', messageCtrl.createMessage);
-  
+router.post('/create', multer, messageCtrl.createMessage);
 router.put('/modify', messageCtrl.modifyMessage);
-  
 router.delete('/destroy', messageCtrl.destroyMessage);
-  
 router.get('/list', messageCtrl.listMessage);
 
 // Route qui permet de gérer les likes des sauces

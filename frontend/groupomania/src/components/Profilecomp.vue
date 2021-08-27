@@ -130,7 +130,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(["getAdmin, getProfile"]),
+    ...mapGetters(["getAdmin"]),
   },
 };
 </script>

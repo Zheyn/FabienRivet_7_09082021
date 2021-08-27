@@ -16,8 +16,8 @@ module.exports = {
     //Params
     let title = req.body.title;
     let content = req.body.content;
-    //let attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
-
+    let attachment = `${req.protocol}://${req.get('host')}/images/${req.body.filename}`;
+    
     // if (title == null || content == null) {
     //     return res.status(400).json({ 'error': 'missing parameters'});
     // }
@@ -41,7 +41,7 @@ module.exports = {
         function (userFound, done) {
           if (userFound) {
             models.Message.create({
-              // attachment: attachment,
+              attachment: attachment,
               title: title,
               content: content,
               likes: 0,

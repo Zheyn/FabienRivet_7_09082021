@@ -2,8 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const messageRoutes = require('./routes/message');
 const userRoutes = require('./routes/user');
-
-//const path = require('path');
+const path = require('path');
 
 // Instantiate app
 const app = express();
@@ -22,7 +21,7 @@ app.use((req, res, next) => {
 
 
 //multer
-//app.use('/images', express.static(path.join(__dirname, 'images')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 app.use('/api/auth', userRoutes);

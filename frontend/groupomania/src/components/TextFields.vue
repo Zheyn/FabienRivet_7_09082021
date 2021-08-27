@@ -55,7 +55,7 @@
           </emoji-picker>
         </div>
         <div class="file-input">
-          <v-file-input v-model="fileInput" accept="image/*" label="File input"></v-file-input>
+          <v-file-input v-model="image" accept="image/*" label="File input"></v-file-input>
         </div>
         <div class="my-2">
           <v-btn @click="addMessage" color="light-blue lighten-1" dark
@@ -72,7 +72,7 @@ import { mapGetters } from "vuex";
 export default {
   data: function () {
     return {
-      fileInput: "",
+      image: null,
       content: "",
       search: "",
       rules: [(v) => v.length <= 255 || "Max 255 caractères"],
@@ -87,8 +87,9 @@ export default {
         content: this.content,
         title: "",
         likes: "",
-        attachment: this.fileInput
+        attachment: this.image
       };
+      console.log(this.image)
       const requestOptions = {
         method: "POST",
         headers: {
