@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router(); 
-//const auth = require('../middleware/auth')
+const auth = require('../middleware/auth')
 const messageCtrl = require('../controllers/messagesCtrl');
 const multer = require('../middleware/multer-config')
 
-router.post('/create', multer, messageCtrl.createMessage);
-router.put('/modify', messageCtrl.modifyMessage);
-router.delete('/destroy', messageCtrl.destroyMessage);
+router.post('/create', auth, multer, messageCtrl.createMessage);
+router.put('/modify/', auth, multer, messageCtrl.modifyMessage);
+router.delete('/destroy', auth, messageCtrl.destroyMessage);
 router.get('/list', messageCtrl.listMessage);
 
 // Route qui permet de gérer les likes des sauces
