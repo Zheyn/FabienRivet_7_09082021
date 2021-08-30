@@ -9,7 +9,7 @@ exports.createMessage = (req, res, next) => {
     UserId: req.body.userId,
     title: req.body.title,
     content: req.body.content,
-    //attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     likes: 0,
   });
   message

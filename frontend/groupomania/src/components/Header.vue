@@ -10,13 +10,17 @@
       <div class="header_link-all">
         <div class="header_icon"><i class="fas fa-user"></i></div>
         <div class="header_icon-text">
-          <router-link to="/Profile" class="header_link-profil">Profil</router-link>
+          <router-link to="/Profile" class="header_link-profil"
+            >Profil</router-link
+          >
         </div>
       </div>
       <div class="header_link-all">
         <div class="header_icon"><i class="fas fa-sign-out-alt"></i></div>
         <div class="header_icon-text">
-          <a href="" class="header_link-profil">Déconnexion</a>
+          <router-link to="/#/Start" @click="disconnect()" class="header_link-profil"
+            >Déconnexion</router-link
+          >
         </div>
       </div>
     </nav>
@@ -24,6 +28,14 @@
 </template>
 
 <script>
+
+export default {
+  methods: {
+    disconnect() {
+      this.$store.commit("DISCONNECT");
+    },
+  },
+};
 </script>
 
 <style  lang="scss">

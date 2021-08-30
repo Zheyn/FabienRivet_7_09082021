@@ -83,20 +83,26 @@ export default {
       this.content += emoji;
     },
     addMessage() {
-      let valueMessage = {
-        content: this.content,
-        title: "",
-        likes: "",
-        attachment: this.image
-      };
-      console.log(this.image)
+      // let valueMessage = {
+      //   content: this.content,
+      //   title: "",
+      //   likes: "",
+      //   attachment: this.image
+      // };
+      // console.log(this.image)
+
+      const formData = new FormData();
+      formData.append("attachment", this.image);
+      formData.append("content", this.content);
+      console.log(this.image);
+      
       const requestOptions = {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: "Bearer " + this.$store.getters.getToken,
         },
-        body: JSON.stringify(valueMessage),
+        body: formData,
       };
       fetch("http://localhost:3000/api/messages/create/", requestOptions)
         .then((response) => response.json())
