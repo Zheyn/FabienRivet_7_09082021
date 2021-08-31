@@ -55,7 +55,7 @@
           </emoji-picker>
         </div>
         <div class="file-input">
-          <v-file-input v-model="image" accept="image/*" label="File input"></v-file-input>
+          <v-file-input v-model="image" accept="image/*" label="Votre image"></v-file-input>
         </div>
         <div class="my-2">
           <v-btn @click="addMessage" color="light-blue lighten-1" dark
@@ -99,7 +99,7 @@ export default {
       const requestOptions = {
         method: "POST",
         headers: {
-          "Content-Type": "multipart/form-data",
+         
           Authorization: "Bearer " + this.$store.getters.getToken,
         },
         body: formData,
@@ -108,6 +108,8 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
+          this.content = ""
+          this.image = null
         });
       fetch("http://localhost:3000/api/messages/list")
         .then((response) => response.json())

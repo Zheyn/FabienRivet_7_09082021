@@ -7,6 +7,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     username: "",
+    email: "",
     token: "",
     isAdmin: false,
     messages: [],
@@ -32,6 +33,7 @@ export default new Vuex.Store({
     getMessages: (state) => state.messages,
     getAdmin: (state) => state.isAdmin,
     getProfile: (state) => state.username,
+    getEmail: (state) => state.email
   },
   actions: {},
   modules: {},

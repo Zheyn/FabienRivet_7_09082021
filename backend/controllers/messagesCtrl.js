@@ -1,15 +1,17 @@
-//const Message = require('../models/message');
 const db = require("../models/index");
 
 // Récupération du module 'file system' de Node permettant de gérer ici les téléchargements et modifications d'images
 //const fs = require('fs');
 
 exports.createMessage = (req, res, next) => {
+  let attachment
+  if (req.file) {
+    attachment = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`;
+  }
   const message = db.Message.build({
-    UserId: req.body.userId,
-    title: req.body.title,
+    UserId: res.locals.userId,
     content: req.body.content,
-    attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    attachment: attachment,
     likes: 0,
   });
   message
@@ -17,9 +19,6 @@ exports.createMessage = (req, res, next) => {
     .then(() => res.status(201).json({ message: "Objet enregistré !" }))
     .catch((error) => res.status(400).json({ error }));
 };
-
-// { content: content },
-//               { where: { id: messageId } }
 
 exports.modifyMessage = (req, res, next) => {
   db.Message.update(
@@ -51,9 +50,8 @@ exports.listMessage = (req, res, next) => {
     let fields = req.query.fields;
     let limit = parseInt(req.query.limit);
     let offset = parseInt(req.query.offset);
-    let order = req.query.order;
+    //let order = req.query.order;
     db.Message.findAll({
-      order: [order != null ? order.split(":") : ["title", "ASC"]],
       attributes: fields !== "*" && fields != null ? fields.split(",") : null,
       limit: !isNaN(limit) ? limit : null,
       offset: !isNaN(offset) ? offset : null,
@@ -64,7 +62,7 @@ exports.listMessage = (req, res, next) => {
         },
       ],
     })
-      .then(sauces => res.status(200).json(sauces))
+      .then(messages => res.status(200).json(messages))
       .catch(error => res.status(400).json({ error }));
 }
 

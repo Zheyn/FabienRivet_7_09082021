@@ -23,27 +23,32 @@
           <v-switch v-model="getMessage.switch1"></v-switch>
         </div>
       </div>
-      <p v-if="!getMessage.switch1" class="text_content">
-        {{ getMessage.content }}
-      </p>
-      <div class="text_area-modify d-flex align-center justify-center">
-        <v-textarea
-          v-if="getMessage.switch1"
-          :rules="rules"
-          counter="255"
-          v-model="getMessage.content"
-          class="text_area-switch"
-          color="black"
-          no-resize
-        ></v-textarea>
-        <v-btn
-          @click="modify(getMessage)"
-          v-if="getMessage.switch1"
-          color="primary"
-        >
-          Modifier
-        </v-btn>
+      <div class="container-content d-flex flex-column align-center">
+        <p v-if="!getMessage.switch1" class="text-content align-self-start">
+          {{ getMessage.content }}
+        </p>
+        <div class="text_area-modify d-flex align-center justify-center">
+          <v-textarea
+            v-if="getMessage.switch1"
+            :rules="rules"
+            counter="255"
+            v-model="getMessage.content"
+            class="text_area-switch"
+            color="black"
+            no-resize
+          ></v-textarea>
+          <v-btn
+            @click="modify(getMessage)"
+            v-if="getMessage.switch1"
+            color="primary"
+            small
+          >
+            Modifier
+          </v-btn>
+        </div>
+        <img v-bind:src="getMessage.attachment" alt="" class="img-content" />
       </div>
+
       <div class="likes d-flex justify-end">
         <v-btn disabled class="ma-2" text icon color="blue lighten-2">
           <v-icon>mdi-thumb-up </v-icon>
@@ -123,16 +128,28 @@ export default {
 .profil_content {
   padding: 15px 0 0 15px;
 }
-.text_content {
-  padding: 10px 10px 0 10px;
-}
 .username_profile {
   font-weight: 600;
 }
 .likes {
   padding: 0px 15px 0 0;
 }
-.text_area-modify{
+.text_area-modify {
   width: 95%;
+}
+.container-content {
+  border: 2px solid rgba(0, 0, 0, 0.205);
+  border-radius: 20px;
+  padding: 15px;
+  margin: auto;
+  width: 60%;
+  & .img-content {
+    border-radius: 10px;
+  }
+  & .text-content {
+    font-size: 1.1rem;
+    font-weight: 400;
+    padding-left: 10px;
+  }
 }
 </style>

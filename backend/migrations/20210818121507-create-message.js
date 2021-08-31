@@ -14,11 +14,8 @@ module.exports = {
         references: {
           model: 'Users',
           key: 'id'
-        }
-      },
-      title: {
-        allowNull: false,
-        type: Sequelize.STRING
+        },
+        onDelete: "cascade"
       },
       content: {
         allowNull: false,

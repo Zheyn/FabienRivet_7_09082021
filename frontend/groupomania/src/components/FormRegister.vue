@@ -111,11 +111,19 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           if (data.userId) {
+            console.log(data.userId);
+            this.$store.commit('ADD_PROFILE', data);
             document.location.href = "#/Home";
           }
           console.log(data);
         });
       console.log(valueForm);
+      fetch("http://localhost:3000/api/messages/list")
+        .then((response) => response.json())
+        .then((data2) => {
+          this.$store.commit('ADD_MESSAGES', data2);
+          console.log(data2)
+        })
     },
   },
 };

@@ -33,6 +33,7 @@ export default {
   methods: {
     disconnect() {
       this.$store.commit("DISCONNECT");
+      
     },
   },
 };
