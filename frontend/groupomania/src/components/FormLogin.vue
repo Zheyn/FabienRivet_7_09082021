@@ -28,7 +28,7 @@
 
           <div class="button_log">
             <router-link to="/Register" class="link_btn">
-              <v-btn depressed color="primary" class="button_log-1">
+              <v-btn depressed  text color="primary" class="button_log-1">
                 S'inscrire
               </v-btn>
             </router-link>

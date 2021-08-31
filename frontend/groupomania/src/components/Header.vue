@@ -15,31 +15,37 @@
           >
         </div>
       </div>
-      <div class="header_link-all">
-        <div class="header_icon"><i class="fas fa-sign-out-alt"></i></div>
+      <div v-if="getAdmin" class="header_link-all">
+        <div class="header_icon"><i class="fas fa-tools"></i></div>
         <div class="header_icon-text">
-          <router-link to="/#/Start" @click="disconnect()" class="header_link-profil"
-            >Déconnexion</router-link
+          <router-link to="/Administration" class="header_link-profil"
+            >Administration</router-link
           >
         </div>
+      </div>
+      <div class="header_link-all">
+        <v-btn @click="disconnect()" text color="teal lighten-1">Déconnexion</v-btn>
       </div>
     </nav>
   </div>
 </template>
 
 <script>
-
+import { mapGetters } from "vuex";
 export default {
   methods: {
     disconnect() {
       this.$store.commit("DISCONNECT");
-      
+      document.location.href = "/Start";
     },
+  },
+  computed: {
+    ...mapGetters(["getAdmin"]),
   },
 };
 </script>
 
-<style  lang="scss">
+<style lang="scss">
 .header {
   position: sticky;
   top: 0;

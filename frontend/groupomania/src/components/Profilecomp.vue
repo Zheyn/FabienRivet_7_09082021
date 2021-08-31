@@ -1,7 +1,7 @@
 <template>
   <div class="container d-flex flex-column align-center justify-center">
     <router-link to="Home" class="btn_home align-self-start">
-      <v-btn class="ma-2" color="light-green darken-2" dark>
+      <v-btn class="ma-2" text color="light-green darken-2" dark>
         <v-icon dark left> mdi-arrow-left </v-icon>Retour
       </v-btn>
     </router-link>
@@ -39,6 +39,8 @@
     </div>
 
     <v-btn
+      plain
+      text
       @click="alert()"
       v-if="noAlert"
       depressed

@@ -55,10 +55,14 @@
           </emoji-picker>
         </div>
         <div class="file-input">
-          <v-file-input v-model="image" accept="image/*" label="Votre image"></v-file-input>
+          <v-file-input
+            v-model="image"
+            accept="image/*"
+            label="Votre image"
+          ></v-file-input>
         </div>
         <div class="my-2">
-          <v-btn @click="addMessage" color="light-blue lighten-1" dark
+          <v-btn @click="addMessage" text color="light-blue lighten-1" dark
             >Poster</v-btn
           >
         </div>
@@ -70,7 +74,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  data: function () {
+  data: function() {
     return {
       image: null,
       content: "",
@@ -95,11 +99,10 @@ export default {
       formData.append("attachment", this.image);
       formData.append("content", this.content);
       console.log(this.image);
-      
+
       const requestOptions = {
         method: "POST",
         headers: {
-         
           Authorization: "Bearer " + this.$store.getters.getToken,
         },
         body: formData,
@@ -108,12 +111,13 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          this.content = ""
-          this.image = null
+          this.content = "";
+          this.image = null;
         });
       fetch("http://localhost:3000/api/messages/list")
         .then((response) => response.json())
         .then((data2) => {
+          this.message = data2;
           this.$store.commit("ADD_MESSAGES", data2);
           console.log(data2);
         });

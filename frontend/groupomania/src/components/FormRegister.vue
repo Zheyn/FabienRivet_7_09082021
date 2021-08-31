@@ -56,7 +56,7 @@
               S'inscrire
             </v-btn>
             <router-link to="/Login" class="link_btn">
-              <v-btn depressed class="button_log-2"> Se connecter </v-btn>
+              <v-btn depressed text color="pink" class="button_log-2"> Se connecter </v-btn>
             </router-link>
           </div>
         </div>
@@ -169,8 +169,6 @@ export default {
   margin-top: 15px;
 }
 .button_log-2 {
-  background-color: #e91e63 !important;
-  color: azure !important;
   margin-top: 15px;
 }
 .link_btn {

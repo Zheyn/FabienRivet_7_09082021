@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Start from '../views/Start.vue'
 import Profile from '../views/Profile.vue'
+import Administration from '../views/Administration'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/profile',
     name: 'Profile',
     component: Profile
+  },
+  {
+    path: '/Administration',
+    name: 'Administration',
+    component: Administration
   }
   // {
   //   path: '/about',

@@ -77,20 +77,22 @@ exports.modifyUsers = (req, res, next) => {
     },
     { where: { id: res.locals.userId } }
   )
-    .then((user) =>
-      res.status(200).json({
+    .then(() =>
+      res.status(200).json({message: "Utilisateur modifié"}),
+    )
+    .catch((error) => res.status(400).json({ error }));
+    
+    db.User.findOne({
+      where: { id: res.locals.userId },
+    })
+    .then((user) => {
+      return res.status(200).json({
         email: user.email,
         isAdmin: user.isAdmin,
         user: user.username,
-        userId: user.id,
-        token: jwt.sign(
-          { userId: user.id }, // Encode l'id du compte utilisateur
-          "RANDOM_TOKEN_SECRET",
-          { expiresIn: "24h" } // Expiration du token
-        ),
-        message: "Utilisateur modifié",
-      })
-    )
+        userId: user.id
+      });
+    })
     .catch((error) => res.status(400).json({ error }));
 };
 

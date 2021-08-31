@@ -9,7 +9,6 @@
         <p class="profil_content">
           <span class="username_profile"> {{ getMessage.User.username }} </span>
           <span class="date"> {{ getMessage.createdAt }}</span>
-          <span class="message-id"> {{ getMessage.id }}</span>
         </p>
         <div class="btn-top d-flex align-center">
           <v-btn
@@ -40,6 +39,7 @@
           <v-btn
             @click="modify(getMessage)"
             v-if="getMessage.switch1"
+            text
             color="primary"
             small
           >
