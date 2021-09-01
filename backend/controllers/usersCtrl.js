@@ -76,21 +76,16 @@ exports.modifyUsers = (req, res, next) => {
       //attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     },
     { where: { id: res.locals.userId } }
-  )
-    .then(() =>
-      res.status(200).json({message: "Utilisateur modifié"}),
-    )
-    .catch((error) => res.status(400).json({ error }));
-    
-    db.User.findOne({
-      where: { id: res.locals.userId },
-    })
+  );
+  db.User.findOne({
+    where: { id: res.locals.userId },
+  })
     .then((user) => {
       return res.status(200).json({
         email: user.email,
         isAdmin: user.isAdmin,
         user: user.username,
-        userId: user.id
+        userId: user.id,
       });
     })
     .catch((error) => res.status(400).json({ error }));

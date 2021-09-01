@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const messageRoutes = require('./routes/message');
 const userRoutes = require('./routes/user');
+const adminRoutes = require ('./routes/admin')
 const path = require('path');
 
 // Instantiate app
@@ -26,5 +27,6 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/api/auth', userRoutes);
 app.use('/api/messages', messageRoutes)
+app.use('/api/admin', adminRoutes)
 
 module.exports = app; // Export de l'application

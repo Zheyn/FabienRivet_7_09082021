@@ -18,7 +18,7 @@
       <div v-if="getAdmin" class="header_link-all">
         <div class="header_icon"><i class="fas fa-tools"></i></div>
         <div class="header_icon-text">
-          <router-link to="/Administration" class="header_link-profil"
+          <router-link @click="addUsers()" to="/Administration" class="header_link-profil"
             >Administration</router-link
           >
         </div>

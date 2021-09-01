@@ -12,7 +12,7 @@
         </p>
         <div class="btn-top d-flex align-center">
           <v-btn
-            @click="idMessage(getMessage.id)"
+            @click="deleteMessage(getMessage.id)"
             v-if="getAdmin"
             text
             icon
@@ -85,7 +85,7 @@ export default {
           message.switch1 = false;
         });
     },
-    idMessage(messageId) {
+    deleteMessage(messageId) {
       let idMessage = {
         id: messageId,
       };
@@ -145,6 +145,7 @@ export default {
   width: 60%;
   & .img-content {
     border-radius: 10px;
+    width: 100%;
   }
   & .text-content {
     font-size: 1.1rem;
