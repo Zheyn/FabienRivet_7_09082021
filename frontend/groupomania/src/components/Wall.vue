@@ -1,44 +1,44 @@
 <template>
   <div class="container_wall">
     <div
-      v-for="getMessage in getMessages"
-      :key="getMessage.id"
+      v-for="message in messages"
+      :key="message.id"
       class="card_message"
     >
       <div class="info-message d-flex justify-space-between">
         <p class="profil_content">
-          <span class="username_profile"> {{ getMessage.User.username }} </span>
-          <span class="date"> {{ getMessage.createdAt }}</span>
+          <span class="username_profile"> {{ message.User.username }} </span>
+          <span class="date"> {{ message.createdAt | moment("from", "now", true,)}}</span>
         </p>
         <div class="btn-top d-flex align-center">
           <v-btn
-            @click="deleteMessage(getMessage.id)"
+            @click="deleteMessage(message)"
             v-if="getAdmin"
             text
             icon
             color="red lighten-2"
             ><v-icon>mdi-delete-forever</v-icon></v-btn
           >
-          <v-switch v-model="getMessage.switch1"></v-switch>
+          <v-switch v-model="message.switch1"></v-switch>
         </div>
       </div>
       <div class="container-content d-flex flex-column align-center">
-        <p v-if="!getMessage.switch1" class="text-content align-self-start">
-          {{ getMessage.content }}
+        <p v-if="!message.switch1" class="text-content align-self-start">
+          {{ message.content }}
         </p>
         <div class="text_area-modify d-flex align-center justify-center">
           <v-textarea
-            v-if="getMessage.switch1"
+            v-if="message.switch1"
             :rules="rules"
             counter="255"
-            v-model="getMessage.content"
+            v-model="message.content"
             class="text_area-switch"
             color="black"
             no-resize
           ></v-textarea>
           <v-btn
-            @click="modify(getMessage)"
-            v-if="getMessage.switch1"
+            @click="modify(message)"
+            v-if="message.switch1"
             text
             color="primary"
             small
@@ -46,7 +46,7 @@
             Modifier
           </v-btn>
         </div>
-        <img v-bind:src="getMessage.attachment" alt="" class="img-content" />
+        <img v-bind:src="message.attachment" alt="" class="img-content" />
       </div>
 
       <div class="likes d-flex justify-end">
@@ -63,12 +63,18 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
+      messages: [],
       contentModify: "",
       rules: [(v) => v.length <= 255 || "Max 255 caractères"],
       switch1: false,
     };
   },
   methods: {
+    recup: function(data) {
+      this.dataOk = data
+      this.messages = data
+      console.log('wallData', this.messages)
+    },
     modify(message) {
       const requestOptions = {
         method: "PUT",
@@ -85,9 +91,9 @@ export default {
           message.switch1 = false;
         });
     },
-    deleteMessage(messageId) {
+    deleteMessage(message) {
       let idMessage = {
-        id: messageId,
+        id: message.id,
       };
       console.log(idMessage);
       const requestOptions = {
@@ -100,13 +106,28 @@ export default {
       };
       fetch("http://localhost:3000/api/messages/destroy/", requestOptions)
         .then((response) => response.json())
-        .then((data) => {
-          console.log("Response data id message", data);
+        .then(() => {
+          this.messages = this.messages.filter(item => item != message)
+        });
+    },
+    getMessages() {
+      fetch("http://localhost:3000/api/messages/list")
+        .then((response) => response.json())
+        .then((data2) => {
+          this.messages = data2
+          console.log(data2);
         });
     },
   },
+  created: function () {
+    this.getMessages()
+    this.recup()
+  },
+  destroyed: function () {
+    this.deleteMessage()
+  },
   computed: {
-    ...mapGetters(["getMessages", "getAdmin"]),
+    ...mapGetters(["getAdmin"]),
   },
 };
 </script>

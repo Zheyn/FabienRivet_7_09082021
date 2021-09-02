@@ -5,6 +5,7 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import { EmojiPickerPlugin } from 'vue-emoji-picker'
 Vue.use(EmojiPickerPlugin)
+Vue.use(require('vue-moment'));
 Vue.config.productionTip = false
 
 new Vue({

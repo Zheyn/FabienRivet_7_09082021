@@ -86,19 +86,18 @@ export default {
     insert(emoji) {
       this.content += emoji;
     },
+    getMessages() {
+      fetch("http://localhost:3000/api/messages/list")
+        .then((response) => response.json())
+        .then((data2) => {
+          this.$emit('dataOk', data2)
+        });
+    },
     addMessage() {
-      // let valueMessage = {
-      //   content: this.content,
-      //   title: "",
-      //   likes: "",
-      //   attachment: this.image
-      // };
-      // console.log(this.image)
-
       const formData = new FormData();
       formData.append("attachment", this.image);
       formData.append("content", this.content);
-      console.log(this.image);
+      console.log('image', this.image);
 
       const requestOptions = {
         method: "POST",
@@ -109,19 +108,16 @@ export default {
       };
       fetch("http://localhost:3000/api/messages/create/", requestOptions)
         .then((response) => response.json())
-        .then((data) => {
-          console.log(data);
+        .then(() => {
+          this.getMessages()
           this.content = "";
           this.image = null;
         });
-      fetch("http://localhost:3000/api/messages/list")
-        .then((response) => response.json())
-        .then((data2) => {
-          this.message = data2;
-          this.$store.commit("ADD_MESSAGES", data2);
-          console.log(data2);
-        });
     },
+    
+  },
+  mounted: function () {
+    this.getMessages()
   },
   computed: {
     ...mapGetters(["getToken"]),
