@@ -1,14 +1,12 @@
 <template>
   <div class="container_wall">
-    <div
-      v-for="message in messages"
-      :key="message.id"
-      class="card_message"
-    >
+    <div v-for="message in messages" :key="message.id" class="card_message">
       <div class="info-message d-flex justify-space-between">
         <p class="profil_content">
           <span class="username_profile"> {{ message.User.username }} </span>
-          <span class="date"> {{ message.createdAt | moment("from", "now", true,)}}</span>
+          <span class="date">
+            {{ message.createdAt | moment("from", "now", true) }}</span
+          >
         </p>
         <div class="btn-top d-flex align-center">
           <v-btn
@@ -46,9 +44,18 @@
             Modifier
           </v-btn>
         </div>
-        <img v-bind:src="message.attachment" alt="" class="img-content" />
+        <div class="container-img">
+          <img v-bind:src="message.attachment" alt="" class="img-content" />
+          <v-btn
+            class="delete-image"
+            @click="deleteMessage(message)"
+            v-if="message.switch1"
+            icon
+            color="red"
+            ><v-icon>mdi-close-circle</v-icon></v-btn
+          >
+        </div>
       </div>
-
       <div class="likes d-flex justify-end">
         <v-btn disabled class="ma-2" text icon color="blue lighten-2">
           <v-icon>mdi-thumb-up </v-icon>
@@ -71,9 +78,9 @@ export default {
   },
   methods: {
     recup: function(data) {
-      this.dataOk = data
-      this.messages = data
-      console.log('wallData', this.messages)
+      this.dataOk = data;
+      this.messages = data;
+      console.log("wallData", this.messages);
     },
     modify(message) {
       const requestOptions = {
@@ -107,25 +114,25 @@ export default {
       fetch("http://localhost:3000/api/messages/destroy/", requestOptions)
         .then((response) => response.json())
         .then(() => {
-          this.messages = this.messages.filter(item => item != message)
+          this.messages = this.messages.filter((item) => item != message);
         });
     },
     getMessages() {
       fetch("http://localhost:3000/api/messages/list")
         .then((response) => response.json())
         .then((data2) => {
-          this.messages = data2
+          this.messages = data2;
           console.log(data2);
         });
     },
   },
-  created: function () {
-    this.getMessages()
-    this.recup()
+  created: function() {
+    this.getMessages();
+    this.recup();
   },
-  destroyed: function () {
-    this.deleteMessage()
-  },
+  // destroyed: function() {
+  //   this.deleteMessage();
+  // },
   computed: {
     ...mapGetters(["getAdmin"]),
   },
@@ -172,6 +179,13 @@ export default {
     font-size: 1.1rem;
     font-weight: 400;
     padding-left: 10px;
+  }
+}
+.container-img {
+  position: relative;
+  & .delete-image {
+    position: absolute;
+    transform: translateX(-40px);
   }
 }
 </style>

@@ -18,4 +18,4 @@ const storage = multer.diskStorage({
   }
 });
 
-module.exports = multer({storage: storage}).single('attachment');
+module.exports = multer({storage: storage, limits: { fileSize: 10000000 } }).single('attachment'); // 10mb max

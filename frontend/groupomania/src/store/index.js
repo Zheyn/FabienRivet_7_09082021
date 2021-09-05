@@ -11,9 +11,10 @@ export default new Vuex.Store({
     token: "",
     isAdmin: false,
     messages: [],
+    fetchUrl: "http://localhost:3000/api/",
   },
   mutations: {
-    ADD_PROFILE(state, data) { // renommer
+    ADD_PROFILE(state, data) {
       state.username = data.user;
       state.token = data.token;
       state.isAdmin = data.isAdmin;
@@ -33,9 +34,17 @@ export default new Vuex.Store({
     getMessages: (state) => state.messages,
     getAdmin: (state) => state.isAdmin,
     getProfile: (state) => state.username,
-    getEmail: (state) => state.email
+    getEmail: (state) => state.email,
   },
-  actions: {},
+  actions: {
+    fetchLogin(context, { endpoint, valueForm }) {
+      return fetch(this.state.fetchUrl + endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(valueForm),
+      });
+    },
+  },
   modules: {},
   plugins: [
     createPersistedState({

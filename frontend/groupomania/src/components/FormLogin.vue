@@ -75,29 +75,29 @@ export default {
         email: this.email,
         password: this.password,
       };
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(valueForm),
-      };
-      fetch("http://localhost:3000/api/auth/login/", requestOptions)
+      // const requestOptions = {
+      //   method: "POST",
+      //   headers: { "Content-Type": "application/json" },
+      //   body: JSON.stringify(valueForm),
+      // };
+      //fetch("http://localhost:3000/api/auth/login/", requestOptions)
+        this.$store.dispatch("fetchLogin", {
+          endpoint: "auth/login", 
+          valueForm: valueForm
+        })
         .then((response) => response.json())
         .then((data) => {
             if (data.userId) {
                 this.$store.commit('ADD_PROFILE', data);
                 document.location.href = "#/Home";
             } else {
-                alert('MDP ko')
+                alert('Mot de passe ou nom d\'utilisateur incorrect')
             }
-          console.log('response data')
-          console.log(data);
         });
-      console.log(valueForm);
       fetch("http://localhost:3000/api/messages/list")
         .then((response) => response.json())
         .then((data2) => {
           this.$store.commit('ADD_MESSAGES', data2);
-          console.log(data2)
         })
     },
   },

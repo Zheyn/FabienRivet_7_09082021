@@ -2,6 +2,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../models/index");
+require('dotenv').config()
 
 // Créé un compte utilisateur
 exports.register = (req, res, next) => {
@@ -25,7 +26,7 @@ exports.register = (req, res, next) => {
             token: jwt.sign(
               // Création d'un token
               { userId: user.id }, // Encode l'id du compte utilisateur
-              "RANDOM_TOKEN_SECRET",
+              process.env.TOKEN,
               { expiresIn: "24h" } // Expiration du token,
             ),
           })
