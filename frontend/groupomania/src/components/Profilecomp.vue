@@ -92,15 +92,11 @@ export default {
       let valueForm = {
         username: this.username,
       };
-      const requestOptions = {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.$store.getters.getToken,
-        },
-        body: JSON.stringify(valueForm),
-      };
-      fetch("http://localhost:3000/api/auth/modify/", requestOptions)
+      this.$store
+        .dispatch("fetchModifyUsers", {
+          endpoint: "auth/modify",
+          valueForm: valueForm,
+        })
         .then((response) => response.json())
         .then((data) => {
           this.$store.commit("ADD_PROFILE", data);
@@ -111,15 +107,11 @@ export default {
       let valueForm = {
         email: this.email,
       };
-      const requestOptions = {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.$store.getters.getToken,
-        },
-        body: JSON.stringify(valueForm),
-      };
-      fetch("http://localhost:3000/api/auth/modify/", requestOptions)
+      this.$store
+        .dispatch("fetchModifyUsers", {
+          endpoint: "auth/modify",
+          valueForm: valueForm,
+        })
         .then((response) => response.json())
         .then((data) => {
           this.$store.commit("ADD_PROFILE", data);
@@ -127,14 +119,10 @@ export default {
         });
     },
     destroyUser() {
-      const requestOptions = {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.$store.getters.getToken,
-        },
-      };
-      fetch("http://localhost:3000/api/auth/destroy/", requestOptions)
+      this.$store
+        .dispatch("fetchDeleteUsers", {
+          endpoint: "auth/destroy",
+        })
         .then((response) => response.json())
         .then((data) => {
           document.location.href = "/";

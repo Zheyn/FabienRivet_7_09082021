@@ -56,7 +56,9 @@
               S'inscrire
             </v-btn>
             <router-link to="/Login" class="link_btn">
-              <v-btn depressed text color="pink" class="button_log-2"> Se connecter </v-btn>
+              <v-btn depressed text color="pink" class="button_log-2">
+                Se connecter
+              </v-btn>
             </router-link>
           </div>
         </div>
@@ -102,28 +104,27 @@ export default {
         email: this.email,
         password: this.password,
       };
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(valueForm),
-      };
-      fetch("http://localhost:3000/api/auth/register/", requestOptions)
+      this.$store
+        .dispatch("fetchRegister", {
+          endpoint: "auth/register",
+          valueForm: valueForm,
+        })
         .then((response) => response.json())
         .then((data) => {
           if (data.userId) {
             console.log(data.userId);
-            this.$store.commit('ADD_PROFILE', data);
+            this.$store.commit("ADD_PROFILE", data);
             document.location.href = "#/Home";
           }
-          console.log(data);
         });
-      console.log(valueForm);
-      fetch("http://localhost:3000/api/messages/list")
+      this.$store
+        .dispatch("fetchListMessages", {
+          endpoint: "messages/list",
+        })
         .then((response) => response.json())
         .then((data2) => {
-          this.$store.commit('ADD_MESSAGES', data2);
-          console.log(data2)
-        })
+          this.$store.commit("ADD_MESSAGES", data2);
+        });
     },
   },
 };

@@ -32,7 +32,14 @@
             <td>{{ user.isAdmin }}</td>
             <td>{{ user.id }}</td>
             <td>
-              <v-btn @click="deleteUser(user.id)" class="ma-2" text color="red lighten-1"> Supprimer </v-btn>
+              <v-btn
+                @click="deleteUser(user)"
+                class="ma-2"
+                text
+                color="red lighten-1"
+              >
+                Supprimer
+              </v-btn>
             </td>
           </tr>
         </tbody>
@@ -63,7 +70,14 @@
             <td>{{ message.content }}</td>
             <td>{{ message.likes }}</td>
             <td>
-              <v-btn @click="deleteMessage(message.id)" class="ma-2" text color="red lighten-1"> Supprimer </v-btn>
+              <v-btn
+                @click="deleteMessage(message.id)"
+                class="ma-2"
+                text
+                color="red lighten-1"
+              >
+                Supprimer
+              </v-btn>
             </td>
           </tr>
         </tbody>
@@ -83,92 +97,77 @@ export default {
   },
   methods: {
     addUsers() {
-      const requestOptions = {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.$store.getters.getToken,
-        },
-      };
-      fetch("http://localhost:3000/api/admin", requestOptions)
+      this.$store
+        .dispatch("fetchGetUsers", {
+          endpoint: "admin",
+        })
         .then((response) => response.json())
         .then((data) => {
           this.users = data;
-          console.log(data);
         });
     },
     addMessages() {
-      const requestOptions = {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.$store.getters.getToken,
-        },
-      };
-      fetch("http://localhost:3000/api/messages/list", requestOptions)
+      this.$store
+        .dispatch("fetchListMessages", {
+          endpoint: "messages/list",
+        })
         .then((response) => response.json())
         .then((data) => {
           this.messages = data;
-          console.log(data);
         });
     },
     deleteMessage(messageId) {
       let idMessage = {
         id: messageId,
       };
-      console.log(idMessage);
-      const requestOptions = {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.$store.getters.getToken,
-        },
-        body: JSON.stringify(idMessage),
-      };
-      fetch("http://localhost:3000/api/messages/destroy/", requestOptions)
+      this.$store
+        .dispatch("fetchDeleteMessages", {
+          endpoint: "messages/destroy",
+          idMessage: idMessage,
+        })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Response data id message", data);
+          console.log(data);
         });
-        const requestOption = {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.$store.getters.getToken,
-        },
-      };
-      fetch("http://localhost:3000/api/messages/list", requestOption)
+
+      this.$store
+        .dispatch("fetchListMessages", {
+          endpoint: "messages/list",
+        })
         .then((response) => response.json())
         .then((data) => {
           this.messages = data;
-          console.log(data);
         });
     },
-    deleteUser(userId) {
+    deleteUser(user) {
       let idUser = {
-        idUser: userId,
+        idUser: user.id,
       };
-      console.log(idUser);
-      const requestOptions = {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.$store.getters.getToken,
-        },
-        body: JSON.stringify(idUser),
-      };
-      fetch("http://localhost:3000/api/admin/", requestOptions)
+      this.$store
+        .dispatch("fetchDeleteUsers", {
+          endpoint: "admin",
+          idUser: idUser,
+        })
         .then((response) => response.json())
         .then((data) => {
-          console.log("Response data id message", data);
+          console.log(data);
+        });
+      this.$store
+        .dispatch("fetchGetUsers", {
+          endpoint: "admin",
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          this.users = data;
         });
     },
   },
   mounted: function () {
-    this.deleteMessage()
+    this.deleteMessage();
   },
   destroyed: function () {
-    this.deleteMessage()
+    this.deleteMessage();
+    this.deleteUser();
   },
   computed: {
     ...mapGetters(["getAdmin", "getToken"]),

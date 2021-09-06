@@ -74,7 +74,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  data: function() {
+  data: function () {
     return {
       image: null,
       content: "",
@@ -87,37 +87,35 @@ export default {
       this.content += emoji;
     },
     getMessages() {
-      fetch("http://localhost:3000/api/messages/list")
+      this.$store
+        .dispatch("fetchListMessages", {
+          endpoint: "messages/list",
+        })
         .then((response) => response.json())
         .then((data2) => {
-          this.$emit('dataOk', data2)
+          this.$emit("dataOk", data2);
         });
     },
     addMessage() {
       const formData = new FormData();
       formData.append("attachment", this.image);
       formData.append("content", this.content);
-      console.log('image', this.image);
 
-      const requestOptions = {
-        method: "POST",
-        headers: {
-          Authorization: "Bearer " + this.$store.getters.getToken,
-        },
-        body: formData,
-      };
-      fetch("http://localhost:3000/api/messages/create/", requestOptions)
+      this.$store
+        .dispatch("fetchCreateMessages", {
+          endpoint: "messages/create",
+          formData: formData,
+        })
         .then((response) => response.json())
         .then(() => {
-          this.getMessages()
+          this.getMessages();
           this.content = "";
           this.image = null;
         });
     },
-    
   },
   mounted: function () {
-    this.getMessages()
+    this.getMessages();
   },
   computed: {
     ...mapGetters(["getToken"]),

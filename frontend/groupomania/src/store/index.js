@@ -44,6 +44,88 @@ export default new Vuex.Store({
         body: JSON.stringify(valueForm),
       });
     },
+
+    fetchListMessages(context, { endpoint }) {
+      return fetch(this.state.fetchUrl + endpoint, {
+        method: "GET",
+      });
+    },
+
+    fetchRegister(context, { endpoint, valueForm }) {
+      return fetch(this.state.fetchUrl + endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(valueForm),
+      });
+    },
+
+    fetchCreateMessages(context, { endpoint, formData }) {
+      return fetch(this.state.fetchUrl + endpoint, {
+        method: "POST",
+        headers: {
+          Authorization: "Bearer " + this.state.token,
+        },
+
+        body: formData,
+      });
+    },
+
+    fetchModifyMessages(context, { endpoint, message }) {
+      return fetch(this.state.fetchUrl + endpoint, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.state.token,
+        },
+
+        body: JSON.stringify(message),
+      });
+    },
+
+    fetchDeleteMessages(context, { endpoint, idMessage }) {
+      return fetch(this.state.fetchUrl + endpoint, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.state.token,
+        },
+
+        body: JSON.stringify(idMessage),
+      });
+    },
+
+    fetchModifyUsers(context, { endpoint, valueForm }) {
+      return fetch(this.state.fetchUrl + endpoint, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.state.token,
+        },
+
+        body: JSON.stringify(valueForm),
+      });
+    },
+
+    fetchDeleteUsers(context, { endpoint, idUser }) {
+      return fetch(this.state.fetchUrl + endpoint, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.state.token,
+        },
+        body: JSON.stringify(idUser),
+      });
+    },
+
+    fetchGetUsers(context, { endpoint }) {
+      return fetch(this.state.fetchUrl + endpoint, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.state.token,
+        },
+      });
+    },
   },
   modules: {},
   plugins: [

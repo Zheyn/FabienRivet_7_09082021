@@ -28,18 +28,18 @@
 
           <div class="button_log">
             <router-link to="/Register" class="link_btn">
-              <v-btn depressed  text color="primary" class="button_log-1">
+              <v-btn depressed text color="primary" class="button_log-1">
                 S'inscrire
               </v-btn>
             </router-link>
 
-            <v-btn 
-                :disabled="!valid"
-                depressed 
-                class="button_log-2" 
-                @click="addLog" 
-            > 
-             Se connecter 
+            <v-btn
+              :disabled="!valid"
+              depressed
+              class="button_log-2"
+              @click="addLog"
+            >
+              Se connecter
             </v-btn>
           </div>
         </div>
@@ -75,30 +75,28 @@ export default {
         email: this.email,
         password: this.password,
       };
-      // const requestOptions = {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(valueForm),
-      // };
-      //fetch("http://localhost:3000/api/auth/login/", requestOptions)
-        this.$store.dispatch("fetchLogin", {
-          endpoint: "auth/login", 
-          valueForm: valueForm
+      this.$store
+        .dispatch("fetchLogin", {
+          endpoint: "auth/login",
+          valueForm: valueForm,
         })
         .then((response) => response.json())
         .then((data) => {
-            if (data.userId) {
-                this.$store.commit('ADD_PROFILE', data);
-                document.location.href = "#/Home";
-            } else {
-                alert('Mot de passe ou nom d\'utilisateur incorrect')
-            }
+          if (data.userId) {
+            this.$store.commit("ADD_PROFILE", data);
+            document.location.href = "#/Home";
+          } else {
+            alert("Mot de passe ou nom d'utilisateur incorrect");
+          }
         });
-      fetch("http://localhost:3000/api/messages/list")
+      this.$store
+        .dispatch("fetchListMessages", {
+          endpoint: "messages/list",
+        })
         .then((response) => response.json())
         .then((data2) => {
-          this.$store.commit('ADD_MESSAGES', data2);
-        })
+          this.$store.commit("ADD_MESSAGES", data2);
+        });
     },
   },
 };

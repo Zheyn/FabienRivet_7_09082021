@@ -77,56 +77,48 @@ export default {
     };
   },
   methods: {
-    recup: function(data) {
+    recup: function (data) {
       this.dataOk = data;
       this.messages = data;
-      console.log("wallData", this.messages);
     },
     modify(message) {
-      const requestOptions = {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.$store.getters.getToken,
-        },
-        body: JSON.stringify(message),
-      };
-      fetch("http://localhost:3000/api/messages/modify/", requestOptions)
+      this.$store
+        .dispatch("fetchModifyMessages", {
+          endpoint: "messages/modify",
+          message: message,
+        })
         .then((response) => response.json())
-        .then((data) => {
-          console.log("Response data id message", data);
+        .then(() => {
           message.switch1 = false;
         });
     },
+
     deleteMessage(message) {
       let idMessage = {
         id: message.id,
       };
-      console.log(idMessage);
-      const requestOptions = {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + this.$store.getters.getToken,
-        },
-        body: JSON.stringify(idMessage),
-      };
-      fetch("http://localhost:3000/api/messages/destroy/", requestOptions)
+      this.$store
+        .dispatch("fetchDeleteMessages", {
+          endpoint: "messages/destroy",
+          idMessage: idMessage,
+        })
         .then((response) => response.json())
         .then(() => {
           this.messages = this.messages.filter((item) => item != message);
         });
     },
     getMessages() {
-      fetch("http://localhost:3000/api/messages/list")
+      this.$store
+        .dispatch("fetchListMessages", {
+          endpoint: "messages/list",
+        })
         .then((response) => response.json())
         .then((data2) => {
           this.messages = data2;
-          console.log(data2);
         });
     },
   },
-  created: function() {
+  created: function () {
     this.getMessages();
     this.recup();
   },

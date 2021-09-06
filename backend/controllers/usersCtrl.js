@@ -86,7 +86,6 @@ exports.modifyUsers = (req, res, next) => {
         email: user.email,
         isAdmin: user.isAdmin,
         user: user.username,
-        userId: user.id,
       });
     })
     .catch((error) => res.status(400).json({ error }));
