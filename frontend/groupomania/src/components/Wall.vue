@@ -1,5 +1,6 @@
 <template>
   <div class="container_wall">
+    <TextFields v-on:newMessage = "newMessage" />
     <div v-for="message in messages" :key="message.id" class="card_message">
       <div class="info-message d-flex justify-space-between">
         <p class="profil_content">
@@ -67,7 +68,11 @@
 
 <script>
 import { mapGetters } from "vuex";
+import TextFields from '../components/TextFields'
 export default {
+   components: {
+      TextFields, 
+    },
   data() {
     return {
       messages: [],
@@ -77,9 +82,9 @@ export default {
     };
   },
   methods: {
-    recup: function (data) {
-      this.dataOk = data;
-      this.messages = data;
+    newMessage(message) {
+      this.messages.unshift(message)
+
     },
     modify(message) {
       this.$store
@@ -120,11 +125,8 @@ export default {
   },
   created: function () {
     this.getMessages();
-    this.recup();
   },
-  // destroyed: function() {
-  //   this.deleteMessage();
-  // },
+ 
   computed: {
     ...mapGetters(["getAdmin"]),
   },

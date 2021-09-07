@@ -2,7 +2,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const db = require("../models/index");
-require('dotenv').config()
+require("dotenv").config();
 
 // Créé un compte utilisateur
 exports.register = (req, res, next) => {
@@ -59,8 +59,8 @@ exports.login = (req, res, next) => {
             token: jwt.sign(
               // Création d'un token
               { userId: user.id }, // Encode l'id du compte utilisateur
-              "RANDOM_TOKEN_SECRET",
-              { expiresIn: "24h" } // Expiration du token
+              process.env.TOKEN,
+              { expiresIn: "24h" } // Expiration du token,
             ),
           });
         })
@@ -74,7 +74,6 @@ exports.modifyUsers = (req, res, next) => {
     {
       email: req.body.email,
       username: req.body.username,
-      //attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     },
     { where: { id: res.locals.userId } }
   );
@@ -86,6 +85,12 @@ exports.modifyUsers = (req, res, next) => {
         email: user.email,
         isAdmin: user.isAdmin,
         user: user.username,
+        token: jwt.sign(
+          // Création d'un token
+          { userId: user.id }, // Encode l'id du compte utilisateur
+          process.env.TOKEN,
+          { expiresIn: "24h" } // Expiration du token,
+        ),
       });
     })
     .catch((error) => res.status(400).json({ error }));
@@ -96,5 +101,25 @@ exports.destroyUser = (req, res, next) => {
     where: { id: res.locals.userId },
   })
     .then(() => res.status(200).json({ message: "Utilisateur supprimé" }))
+    .catch((error) => res.status(400).json({ error }));
+};
+
+exports.getUser = (req, res, next) => {
+  db.User.findOne({
+    where: { id: res.locals.userId },
+  })
+    .then((user) => {
+      return res.status(200).json({
+        email: user.email,
+        isAdmin: user.isAdmin,
+        user: user.username,
+        token: jwt.sign(
+          // Création d'un token
+          { userId: user.id }, // Encode l'id du compte utilisateur
+          process.env.TOKEN,
+          { expiresIn: "24h" } // Expiration du token,
+        ),
+      });
+    })
     .catch((error) => res.status(400).json({ error }));
 };

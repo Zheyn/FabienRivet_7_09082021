@@ -18,7 +18,21 @@ exports.createMessage = (req, res, next) => {
   });
   message
     .save()
-    .then(() => res.status(201).json({ message: "Message enregistré !" }))
+    .then(() => {    
+      db.Message.findOne({
+        where: { id: message.id},
+        include: [
+          {
+            model: db.User,
+            attributes: ["username"],
+          },
+        ],
+      })
+        .then((message) => res.status(200).json(message))
+        .catch((error) => res.status(400).json({ error }));  
+      
+      
+    })
     .catch((error) => res.status(400).json({ error }));
 };
 

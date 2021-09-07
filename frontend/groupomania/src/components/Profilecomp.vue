@@ -6,7 +6,7 @@
       </v-btn>
     </router-link>
     <h1 class="profile_name">
-      Hello, <span class="name">{{ $store.state.username }}</span>
+      Hello, <span class="name">{{ getProfile }}</span>
     </h1>
     <img class="img_avatar" src="../assets/72.png" alt="" />
     <p v-if="getAdmin" class="badge_user">Administrateur</p>
@@ -129,10 +129,25 @@ export default {
           console.log(data);
         });
     },
+
+    getUser() {
+      this.$store
+        .dispatch("fetchGetUser", {
+          endpoint: "auth/",
+        })
+        .then((response) => response.json())
+        .then((data) => {
+           this.$store.commit("ADD_PROFILE", data);
+          console.log(data);
+        });
+    },
   },
   computed: {
     ...mapGetters(["getAdmin", "getEmail", "getProfile", "getToken"]),
   },
+  mounted: function () {
+    this.getUser()
+  }
 };
 </script>
 

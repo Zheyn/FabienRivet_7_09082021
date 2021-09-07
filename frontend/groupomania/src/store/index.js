@@ -3,7 +3,6 @@ import Vuex from "vuex";
 import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
-
 export default new Vuex.Store({
   state: {
     username: "",
@@ -118,6 +117,16 @@ export default new Vuex.Store({
     },
 
     fetchGetUsers(context, { endpoint }) {
+      return fetch(this.state.fetchUrl + endpoint, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + this.state.token,
+        },
+      });
+    },
+
+    fetchGetUser(context, { endpoint }) {
       return fetch(this.state.fetchUrl + endpoint, {
         method: "GET",
         headers: {

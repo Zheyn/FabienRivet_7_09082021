@@ -86,16 +86,6 @@ export default {
     insert(emoji) {
       this.content += emoji;
     },
-    getMessages() {
-      this.$store
-        .dispatch("fetchListMessages", {
-          endpoint: "messages/list",
-        })
-        .then((response) => response.json())
-        .then((data2) => {
-          this.$emit("dataOk", data2);
-        });
-    },
     addMessage() {
       const formData = new FormData();
       formData.append("attachment", this.image);
@@ -107,15 +97,12 @@ export default {
           formData: formData,
         })
         .then((response) => response.json())
-        .then(() => {
-          this.getMessages();
+        .then((message) => {
+          this.$emit("newMessage", message)
           this.content = "";
           this.image = null;
         });
     },
-  },
-  mounted: function () {
-    this.getMessages();
   },
   computed: {
     ...mapGetters(["getToken"]),
@@ -134,6 +121,7 @@ export default {
 .text_fields {
   z-index: 1;
   padding: 20px 20px 0 20px;
+  width: 100%;
   height: 270px;
   position: sticky;
   top: 0;
