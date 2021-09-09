@@ -2,7 +2,7 @@
 ## Openclassrooms - Projet 7 - "Créer un réseau social d'entreprise"
 
 Il est possible de créer un compte utilisateur, de créer des messages avec ou sans images. Possibilité de modifier ses informations personnelles et de supprimer difinitevement son compte.
-Les administrteurs peuvent supprimer les comptes utilisateurs et les messages.
+Les administrateurs peuvent supprimer les comptes utilisateurs et les messages.
 
 ### Technologies utilisées:
 
