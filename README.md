@@ -1,7 +1,6 @@
 # Groupomania
 ## Openclassrooms - Projet 7 - "Créer un réseau social d'entreprise"
 
-###Réseau social d'entreprise
 Il est possible de créer un compte utilisateur, de créer des messages avec ou sans images. Possibilité de modifier ses informations personnelles et de supprimer difinitevement son compte.
 Les administrteurs peuvent supprimer les comptes utilisateurs et les messages.
 
