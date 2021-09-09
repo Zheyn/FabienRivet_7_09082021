@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="container_mid d-flex align-center justify-center flex-column">
-        <h1>Ici, c'est presque comme Twitter.</h1>
+        <h1>Bienvenue sur le réseau Groupomania.</h1>
         <router-link to="/Register" class="link_btn">
           <v-btn depressed color="primary" class="button_log-1">
             Créer un compte
@@ -28,14 +28,13 @@
 
 <style lang='scss' scoped>
 .container_start {
-  background-image: url("../assets/ahah.jpg");
   height: 100vh;
 }
 .container_mid {
-  height: 100vh;
-  transform: translateX(-350px);
-  & h1 {
-    transform: translateY(-40px);
+  height: 70vh;
+  
+  & h1 {  
+    margin-bottom: 20px; 
     font-family: "Dancing Script", cursive;
     font-size: 2.5rem;
   }
