@@ -23,9 +23,10 @@ export default new Vuex.Store({
       state.messages = data;
     },
     DISCONNECT(state) {
+      state.email = "";
       state.token = "";
       state.username = "";
-      state.isAdmin = "";
+      state.isAdmin = false;
     },
   },
   getters: {
@@ -47,6 +48,9 @@ export default new Vuex.Store({
     fetchListMessages(context, { endpoint }) {
       return fetch(this.state.fetchUrl + endpoint, {
         method: "GET",
+        headers: {
+          Authorization: "Bearer " + this.state.token,
+        },
       });
     },
 

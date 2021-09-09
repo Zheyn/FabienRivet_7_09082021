@@ -54,26 +54,6 @@ exports.destroyMessage = (req, res, next) => {
       })
         .then(() => res.status(200).json({ message: "Message supprimé !" }))
         .catch((error) => res.status(400).json({ error }));
-  // db.Message.findOne({
-  //   where: { id: req.body.id },
-  // }).then((message) => {
-  //   if (message.attachment) {
-  //     const filename = message.attachment.split("/images/")[1];
-  //     fs.unlink(`images/${filename}`, () => {
-  //       db.Message.destroy({
-  //         where: { id: req.body.id },
-  //       })
-  //         .then(() => res.status(200).json({ message: "Message supprimé !" }))
-  //         .catch((error) => res.status(400).json({ error }));
-  //     });
-  //   } else {
-  //     db.Message.destroy({
-  //       where: { id: req.body.id },
-  //     })
-  //       .then(() => res.status(200).json({ message: "Message supprimé !" }))
-  //       .catch((error) => res.status(400).json({ error }));
-  //   }
-  // });
 };
 
 exports.listMessage = (req, res, next) => {

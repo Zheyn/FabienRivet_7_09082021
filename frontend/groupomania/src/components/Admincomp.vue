@@ -122,7 +122,7 @@ export default {
       };
       this.$store
         .dispatch("fetchDeleteMessages", {
-          endpoint: "messages/destroy",
+          endpoint: "admin/destroy",
           idMessage: idMessage,
         })
         .then((response) => response.json())
