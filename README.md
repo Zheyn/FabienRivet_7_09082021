@@ -19,6 +19,10 @@ JS, Node.js, MySQL, Sequelize, Express, Vue.js, Vuetify.
 sequelize db:create 
 sequelize db:migrate
 
+Compte admin : 
+mail -> admin@admin.fr 
+mdp -> adminadmin
+
 <hr class="line"></br></br></br>
 
 <img src="https://societeamission.com/wp-content/uploads/2020/09/get.png" width="400" alt="Openclassrooms logo">
