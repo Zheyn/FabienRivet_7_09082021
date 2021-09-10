@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 07 sep. 2021 à 08:31
+-- Généré le : ven. 10 sep. 2021 à 13:25
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -38,16 +38,16 @@ CREATE TABLE IF NOT EXISTS `messages` (
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `userId` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `messages`
 --
 
 INSERT INTO `messages` (`id`, `userId`, `content`, `attachment`, `likes`, `createdAt`, `updatedAt`) VALUES
-(2, 2, 'Merci pour l\'invitation.', 'http://localhost:3000/images/giphy_(2).gif1630841477967.gif', 0, '2021-09-05 11:31:17', '2021-09-05 11:31:17'),
-(3, 3, 'On se fait une pause ?', 'http://localhost:3000/images/giphy_(1).gif1630841564687.gif', 0, '2021-09-05 11:32:44', '2021-09-05 11:32:44'),
-(37, 11, 'Hello', 'http://localhost:3000/images/giphy.gif1630921956035.gif', 0, '2021-09-06 09:52:36', '2021-09-06 09:52:36');
+(76, 11, 'Bienvenue à tous ! ', 'http://localhost:3000/images/giphy.gif1631278272317.gif', 0, '2021-09-10 12:51:12', '2021-09-10 12:51:12'),
+(77, 2, 'Merci de l\'invitation.', 'http://localhost:3000/images/giphy_(2).gif1631278318688.gif', 0, '2021-09-10 12:51:58', '2021-09-10 12:51:58'),
+(78, 2, 'On se fait une pause ?', 'http://localhost:3000/images/giphy_(1).gif1631278329122.gif', 0, '2021-09-10 12:52:09', '2021-09-10 12:52:09');
 
 -- --------------------------------------------------------
 
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `users`
@@ -95,8 +95,9 @@ CREATE TABLE IF NOT EXISTS `users` (
 INSERT INTO `users` (`id`, `email`, `username`, `password`, `isAdmin`, `createdAt`, `updatedAt`) VALUES
 (2, 'haya@gmail.com', 'haya', '$2b$10$VbDTwyxGwzz.M51EUhXilO2XFJntOQIkClX1ydS38BzuqU/XRJVPq', 1, '2021-09-05 11:30:23', '2021-09-06 08:42:23'),
 (3, 'ysera@gmail.com', 'Ysera', '$2b$10$4jYHQlSXGT7ZTLrXjLdPX.ThrKG.YoEjD1v3p9XEVJ83QrAR8TW0W', 0, '2021-09-05 11:32:32', '2021-09-05 11:32:32'),
-(4, 'kangor@gmail.com', 'Kangor', '$2b$10$ZsTCAfXAOSbM9uJctvcSduJugHgLsH0Ese3rT7HLohdjb35DXkkA.', 0, '2021-09-06 07:11:30', '2021-09-06 07:11:30'),
-(11, 'byfabe@gmail.com', 'Zheyn', '$2b$10$Qnztoa7Pgrlp7s0oqxDIQOWZDIWl/zYrRvtzhyfE0Ut7oHpy2RQFy', 1, '2021-09-06 09:13:13', '2021-09-06 09:13:13');
+(11, 'byfabe@gmail.com', 'Zheyn', '$2b$10$Qnztoa7Pgrlp7s0oqxDIQOWZDIWl/zYrRvtzhyfE0Ut7oHpy2RQFy', 1, '2021-09-06 09:13:13', '2021-09-06 09:13:13'),
+(19, 'shunne@gmail.com', 'Shunne', '$2b$10$RoGZr1/cb83zFDP.zRRxW.vKCFaQ82U6ow9VWDNgCE/b75htUt7X6', 0, '2021-09-10 12:27:53', '2021-09-10 12:27:53'),
+(20, 'admin@admin.fr', 'Admin', '$2b$10$92IU6KushSKbomoR8E.K7uqjQ.5Zt1n2DPjniGKDaLo7iTSgjbI72', 1, '2021-09-10 13:22:42', '2021-09-10 13:22:42');
 
 --
 -- Contraintes pour les tables déchargées
