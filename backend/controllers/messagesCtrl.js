@@ -18,9 +18,9 @@ exports.createMessage = (req, res, next) => {
   });
   message
     .save()
-    .then(() => {    
+    .then(() => {
       db.Message.findOne({
-        where: { id: message.id},
+        where: { id: message.id },
         include: [
           {
             model: db.User,
@@ -29,9 +29,7 @@ exports.createMessage = (req, res, next) => {
         ],
       })
         .then((message) => res.status(200).json(message))
-        .catch((error) => res.status(400).json({ error }));  
-      
-      
+        .catch((error) => res.status(400).json({ error }));
     })
     .catch((error) => res.status(400).json({ error }));
 };
@@ -39,8 +37,7 @@ exports.createMessage = (req, res, next) => {
 exports.modifyMessage = (req, res, next) => {
   db.Message.update(
     {
-      content: req.body.content,
-      //attachment: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+      content: req.body.content
     },
     { where: { id: req.body.id } }
   )
@@ -49,11 +46,24 @@ exports.modifyMessage = (req, res, next) => {
 };
 
 exports.destroyMessage = (req, res, next) => {
-  db.Message.destroy({
+  db.Message.findOne({
+    where: { id: req.body.id },
+  })
+    .then((message) => {
+      db.Message.destroy({
         where: { id: req.body.id },
       })
-        .then(() => res.status(200).json({ message: "Message supprimé !" }))
+        .then(() => {
+          const fileName = message.attachment.split("/images/")[1];
+          if (fs.existsSync(`images/${fileName}`)) {
+            fs.unlinkSync(`images/${fileName}`);
+          }
+          res.status(200).json({ message: "Message supprimé !" });
+        })
+
         .catch((error) => res.status(400).json({ error }));
+    })
+    .catch((error) => res.status(400).json({ error }));
 };
 
 exports.listMessage = (req, res, next) => {
